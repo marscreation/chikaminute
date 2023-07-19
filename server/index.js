@@ -5,10 +5,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 // routes
-import AuthRoute from "./routes/AuthRoute.js";
-import UserRoute from "./routes/UserRoute.js";
-import ChatRoute from "./routes/ChatRoute.js";
-import MessageRoute from "./routes/MessageRoute.js";
+import AuthRoute from "./src/routes/AuthRoute.js";
+import UserRoute from "./src/routes/UserRoute.js";
+import ChatRoute from "./src/routes/ChatRoute.js";
+import MessageRoute from "./src/routes/MessageRoute.js";
 
 dotenv.config();
 const PORT = process.env.PORT;
