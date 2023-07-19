@@ -7,6 +7,8 @@ import mongoose from "mongoose";
 // routes
 import AuthRoute from "./routes/AuthRoute.js";
 import UserRoute from "./routes/UserRoute.js";
+import ChatRoute from "./routes/ChatRoute.js";
+import MessageRoute from "./routes/MessageRoute.js";
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -29,3 +31,5 @@ mongoose
 
 app.use("/auth", AuthRoute);
 app.use("/user", UserRoute);
+app.use("/chat", ChatRoute);
+app.use("/message", MessageRoute);
