@@ -13,7 +13,7 @@ export const loginUser = async (req, res) => {
         if (user) {
             const validity = await bcrypt.compare(password, user.password);
             if (!validity) {
-                res.status(400).json({message: "Invalid password"});
+                res.status(400).json({ message: "Invalid password" });
             } else {
                 const { _id, name, email } = user._doc;
                 const token = jwt.sign(
@@ -37,18 +37,24 @@ export const registerUser = async (req, res) => {
     const hashedPass = await bcrypt.hash(req.body.password, salt);
     req.body.password = hashedPass;
     const newUser = new UserModel(req.body);
-    const { username } = req.body;
+    const { username, email } = req.body;
     try {
         const oldUser = await UserModel.findOne({ username });
 
         if (oldUser)
             return res.status(400).json({ message: "User already exists" });
 
+        const emailExist = await UserModel.findOne({ email });
+
+        if (emailExist) {
+            return res.status(400).json({ message: "Email already exists" });
+        }
+
         const user = await newUser.save();
         const token = jwt.sign(
             { username: user.username, id: user._id },
             process.env.JWT_KEY,
-            { expiresIn: "1h" }
+            { expiresIn: process.env.JWT_EXPIRES_IN }
         );
         res.status(200).json({ token });
     } catch (error) {

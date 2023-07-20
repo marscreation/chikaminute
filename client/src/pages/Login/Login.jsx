@@ -33,7 +33,7 @@ function Login() {
                 body: JSON.stringify({ username, password })
             })
             const result = await response.json()
-            
+
             if (response.status == 400) {
                 alert(result.message);
                 return
@@ -62,13 +62,31 @@ function Login() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <div className="mt-2">
-                                <input id="username" name="username" type="username" autoComplete="username" value={username} onChange={handleInputChange} required placeholder='Username' className="block w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input
+                                    id="username"
+                                    name="username"
+                                    type="text"
+                                    value={username}
+                                    onChange={handleInputChange}
+                                    placeholder='Username'
+                                    className="block w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    required
+                                />
                             </div>
                         </div>
 
                         <div>
                             <div className="mt-2">
-                                <input id="password" name="password" type="password" autoComplete="current-password" value={password} onChange={handleInputChange} required placeholder='Password' className="block w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    value={password}
+                                    onChange={handleInputChange}
+                                    placeholder='Password'
+                                    className="block w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    required
+                                />
                             </div>
                         </div>
 
