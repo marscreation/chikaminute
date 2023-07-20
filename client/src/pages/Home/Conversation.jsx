@@ -25,7 +25,7 @@ function Conversation() {
           className="border-2 border-white rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
         />
         <p className="text-sm font-bold -mt-10 ml-12 lg:ml-16 lg:-mt-12">Jet</p>
-        <p className="text-xs -mt-5 mr-1 float-right">10:30pm</p>
+        <p className="text-xs -mt-5 mr-1 float-right text-gray-700">10:30pm</p>
         <p className="text-sm ml-12 mt-2 lg:ml-16">Hello?</p>
       </div>
       <div className=" h-16 p-3 w-full rounded-l-xl text-black mb-2">
@@ -37,7 +37,7 @@ function Conversation() {
         <p className="text-sm font-bold -mt-10 ml-12 lg:ml-16 lg:-mt-12">
           Best Friend
         </p>
-        <p className="text-xs -mt-5 mr-1 float-right">06:15am</p>
+        <p className="text-xs -mt-5 mr-1 float-right text-gray-700">06:15am</p>
         <p className="text-sm ml-12 mt-2 lg:ml-16">Thank you, bff!</p>
       </div>
       <div className=" h-16 p-3 w-full rounded-l-xl text-black mb-2">
@@ -49,7 +49,7 @@ function Conversation() {
         <p className="text-sm font-bold -mt-10 ml-12 lg:ml-16 lg:-mt-12">
           Mama
         </p>
-        <p className="text-xs -mt-5 mr-1 float-right">03:12pm</p>
+        <p className="text-xs -mt-5 mr-1 float-right text-gray-700">03:12pm</p>
         <p className="text-sm ml-12 mt-2 lg:ml-16">Ok</p>
       </div>
       <div className=" h-16 p-3 w-full rounded-l-xl text-black mb-2">
@@ -61,7 +61,7 @@ function Conversation() {
         <p className="text-sm font-bold -mt-10 ml-12 lg:ml-16 lg:-mt-12">
           Mary
         </p>
-        <p className="text-xs -mt-5 mr-1 float-right">03:12pm</p>
+        <p className="text-xs -mt-5 mr-1 float-right text-gray-700">03:12pm</p>
         <p className="text-sm ml-12 mt-2 lg:ml-16">HAHAHAHA</p>
       </div>
     </div>

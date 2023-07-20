@@ -6,9 +6,9 @@ import { TbPinned } from "react-icons/tb";
 function PinnedConversation() {
   return (
     <div className="h-5/6 w-full mt-8">
-      <div className="w-full  mt-10 lg:mt-0 -ml-2 h-7 flex">
-        <TbPinned className="h-6 lg:ml-0 lg:mt-10" />
-        <label className="font-bold mt-0.5 ml-2 text-slate-500 lg:mt-11 lg:ml-4">
+      <div className="w-full mt-10 lg:mt-0 -ml-2 h-7 flex">
+        <TbPinned className="h-6 mr-4 lg:ml-0 lg:mt-10 lg:mr-0" />
+        <label className="font-bold mt-0.5 text-slate-500 lg:mt-11 lg:ml-4">
           Pinned Conversations
         </label>
       </div>
@@ -21,7 +21,7 @@ function PinnedConversation() {
         <p className="text-sm font-bold -mt-10 ml-12 lg:ml-16 lg:-mt-12">
           Marj Faustino
         </p>
-        <p className="text-xs -mt-5 mr-1 float-right">11:11pm</p>
+        <p className="text-xs -mt-5 mr-1 float-right text-gray-700">11:11pm</p>
         <p className="text-sm ml-12 mt-2 lg:ml-16">Hi, how are you today?</p>
       </div>
       <div className=" h-16 p-3 w-full rounded-l-xl text-black mb-2">
@@ -33,7 +33,7 @@ function PinnedConversation() {
         <p className="text-sm font-bold -mt-10 ml-12 lg:ml-16 lg:-mt-12">
           Mars
         </p>
-        <p className="text-xs -mt-5 mr-1 float-right">10:41am</p>
+        <p className="text-xs -mt-5 mr-1 float-right text-gray-700">10:41am</p>
         <p className="text-sm ml-12 mt-2 lg:ml-16">No</p>
       </div>
     </div>
