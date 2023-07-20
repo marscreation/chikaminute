@@ -1,0 +1,56 @@
+/* temporary design for readability*/
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: blue;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formgroup {
+  margin-bottom: 10px;
+}
+
+.formgroup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.formgroup label {
+  text-align: left;
+  display: block;
+  margin: 0 0 5px 3px;
+}
+
+.form {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.registration {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  padding: 0 20px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.errorlabel {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
