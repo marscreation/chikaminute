@@ -6,6 +6,14 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        white: "#ffffff",
+        tahiti: {
+          100: "#f0f4f8",
+        },
+      },
     },
   },
   plugins: [],
