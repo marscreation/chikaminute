@@ -1,14 +1,7 @@
 import React from "react";
-import hehe from "../../assets/hehe.jpg";
-import person from "../../assets/person.png";
 import person2 from "../../assets/person2.png";
 import female from "../../assets/female.png";
 import female2 from "../../assets/female2.png";
-import { FiSearch } from "react-icons/fi";
-import { TbPinned } from "react-icons/tb";
-import { AiFillMessage } from "react-icons/ai";
-import { RxHamburgerMenu } from "react-icons/rx";
-import PinnedConversation from "./PinnedConversation";
 
 function Conversation() {
   return (

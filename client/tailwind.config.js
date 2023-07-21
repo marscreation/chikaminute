@@ -17,7 +17,11 @@ export default {
         },
       },
       fontSize: {
-        xxs: ".50rem",
+        xxs: ".60rem",
+      },
+      margin: {
+        97: "24.2rem",
+        100: "37rem",
       },
     },
   },

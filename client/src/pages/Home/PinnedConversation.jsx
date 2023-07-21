@@ -12,7 +12,7 @@ function PinnedConversation() {
           Pinned Conversations
         </label>
       </div>
-      <div className="bg-white h-16 p-3 w-full rounded-l-xl text-black mb-3 lg:mt-10">
+      <div className="bg-white h-20 p-3 w-full rounded-l-xl text-black mb-3 lg:mt-10 border-y-2">
         <img
           src={hehe}
           alt="logo"
@@ -24,7 +24,7 @@ function PinnedConversation() {
         <p className="text-xs -mt-5 mr-1 float-right text-gray-700">11:11pm</p>
         <p className="text-sm ml-12 mt-2 lg:ml-16">Hi, how are you today?</p>
       </div>
-      <div className=" h-16 p-3 w-full rounded-l-xl text-black mb-2">
+      <div className=" h-16 p-3 w-full rounded-l-xl text-black mb-2 ">
         <img
           src={person}
           alt="logo"
