@@ -9,6 +9,7 @@ import Login from './pages/Login/Login';
 import Profile from './pages/Profile/Profile';
 import ChangePassword from './pages/EditProfile/ChangePassword';
 import EditProfile from './pages/EditProfile/EditProfile';
+import Register from './pages/Register/Register';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,6 +26,7 @@ function App() {
           <Route path="/profile" element={<PrivateRoute element={Profile} />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/changepassword" element={<ChangePassword />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </>

@@ -95,7 +95,7 @@ function EditProfile() {
             autoComplete="off"
             onChange={handleChange}
           />
-          <EditProfileButton buttonName={'Submit Changes'} type={submit} />
+          <EditProfileButton buttonName={'Submit Changes'} type={'submit'} />
         </form>
       </section>
     </div>
