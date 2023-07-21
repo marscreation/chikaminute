@@ -10,6 +10,7 @@ import Profile from './pages/Profile/Profile';
 import ChangePassword from './pages/EditProfile/ChangePassword';
 import EditProfile from './pages/EditProfile/EditProfile';
 import Register from './pages/Register/Register';
+import Home from './pages/Home/Home';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,7 +24,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/profile" element={<PrivateRoute element={Profile} />} />
+          <Route path="/home" element={<PrivateRoute element={Home} />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/register" element={<Register />} />

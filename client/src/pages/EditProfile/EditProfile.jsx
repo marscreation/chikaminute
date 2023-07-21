@@ -10,6 +10,8 @@ function EditProfile() {
     email: '',
   });
 
+  const [errors, setErrors] = useState({});
+
   const userId = sessionStorage.getItem('userId');
   const token = sessionStorage.getItem('token');
 
@@ -23,6 +25,9 @@ function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      //reset
+      setErrors({});
+
       const response = await fetch(`http://localhost:3000/user/${userId}`, {
         method: 'PUT',
         headers: {
@@ -37,6 +42,7 @@ function EditProfile() {
         }),
       });
 
+      const data = await response.json();
       if (response.ok) {
         alert('Profile Updated Successfully');
 
@@ -46,9 +52,24 @@ function EditProfile() {
           username: '',
           email: '',
         });
+      } else {
+        //validate username if username already exist
+        if (data.message === 'User already exists') {
+          setErrors((previous) => ({
+            ...previous,
+            username: 'Username already used',
+          }));
+        }
+        //validate email if email already used
+        if (data.message === 'Email already exists') {
+          setErrors((previous) => ({
+            ...previous,
+            email: 'Email already used',
+          }));
+        }
       }
     } catch (error) {
-      console.log(error);
+      console.log('Failed to update', error);
     }
   };
   return (
@@ -85,6 +106,9 @@ function EditProfile() {
             autoComplete="off"
             onChange={handleChange}
           />
+          {errors.username && (
+            <label className={classes.errorlabel}>{errors.username}</label>
+          )}
           <label>Email: </label>
           <input
             type="email"
@@ -95,6 +119,9 @@ function EditProfile() {
             autoComplete="off"
             onChange={handleChange}
           />
+          {errors.email && (
+            <label className={classes.errorlabel}>{errors.email}</label>
+          )}
           <EditProfileButton buttonName={'Submit Changes'} type={'submit'} />
         </form>
       </section>
