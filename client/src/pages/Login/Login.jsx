@@ -59,12 +59,15 @@ function Login() {
       <div className="bg-tahiti-100 flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-28 w-auto" src={logo} alt="Your Company" />
-          <h2 className="mt-4 text-center text-5xl font-bold leading-9 tracking-tight text-tahiti-150">
+          <h2 className="mt-4 text-center text-5xl font-bold leading-9 tracking-tight text-tahiti-150 mb-4">
             ChikaMinute
           </h2>
+          <p className="text-center">
+            Log in to see photos, videos and blogs from your friends
+          </p>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <div className="mt-2">
