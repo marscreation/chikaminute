@@ -1,22 +1,23 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import logo from "../../assets/logoBg.jpg";
 
 function Login({ setIsLoggedIn }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'username') setUsername(value);
-    if (name === 'password') setPassword(value);
+    if (name === "username") setUsername(value);
+    if (name === "password") setPassword(value);
   };
 
   const validateForm = () => {
     const errors = {};
-    if (!username.trim()) errors.username = 'username is required';
-    if (!password.trim()) errors.password = 'Password is required';
+    if (!username.trim()) errors.username = "username is required";
+    if (!password.trim()) errors.password = "Password is required";
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -27,11 +28,14 @@ function Login({ setIsLoggedIn }) {
     if (validateForm()) {
       const errors = {};
 
-      const response = await fetch(`http://localhost:3000/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_API_URL}/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        }
+      );
       const result = await response.json();
 
       if (response.status == 400) {
@@ -39,12 +43,12 @@ function Login({ setIsLoggedIn }) {
         return;
       }
       if (result.token) {
-        sessionStorage.setItem('token', result.token);
-        sessionStorage.setItem('userId', result.user.id);
+        sessionStorage.setItem("token", result.token);
+        sessionStorage.setItem("userId", result.user.id);
         console.log(result);
         setIsLoggedIn(true);
-        navigate('/profile');
-        alert('welcome');
+        navigate("/profile");
+        alert("welcome");
       }
       if (result.error) {
         errors.login = result.error;
@@ -54,18 +58,18 @@ function Login({ setIsLoggedIn }) {
   };
 
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    const userId = sessionStorage.getItem('userId');
+    const token = sessionStorage.getItem("token");
+    const userId = sessionStorage.getItem("userId");
 
     if (token && userId) {
       setIsLoggedIn(true);
-      navigate('/profile');
+      navigate("/profile");
     }
   }, []);
 
   return (
-    <div className="login grid min-h-screen">
-      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="login grid min-h-screen font-poppins">
+      <div className="bg-tahiti-100 flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-28 w-auto" src={logo} alt="Your Company" />
           <h2 className="mt-4 text-center text-5xl font-bold leading-9 tracking-tight text-tahiti-150 mb-4">
@@ -87,7 +91,7 @@ function Login({ setIsLoggedIn }) {
                   value={username}
                   onChange={handleInputChange}
                   placeholder="Username"
-                  className="block w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 sm:text-sm sm:leading-6"
                   required
                 />
               </div>
@@ -102,7 +106,7 @@ function Login({ setIsLoggedIn }) {
                   value={password}
                   onChange={handleInputChange}
                   placeholder="Password"
-                  className="block w-full rounded-md border-0 p-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 sm:text-sm sm:leading-6"
                   required
                 />
               </div>
@@ -111,22 +115,27 @@ function Login({ setIsLoggedIn }) {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 p-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-tahiti-150 px-3 p-3 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 Sign in
               </button>
             </div>
           </form>
 
-          <p className="mt-10 text-center text-lg text-gray-500">
+          <p className="mt-10 text-center text-lg text-black">
             Don't have an account?
-            <a
+            {/* <a
               href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"
             >
-              {' '}
               Sign up
-            </a>
+            </a> */}
+            <Link
+              to="/register"
+              className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"
+            >
+              Login
+            </Link>
           </p>
         </div>
       </div>

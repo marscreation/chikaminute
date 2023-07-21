@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import classes from "./Register.module.css";
 import logo from "../../assets/logoBg.jpg";
+import { Link } from "react-router-dom";
 import Login from "../Login/Login";
 
 function Register() {
@@ -288,12 +289,18 @@ function Register() {
             </form>
             <p className="mt-5 text-center text-lg text-black">
               Already have an account?
-              <a
+              {/* <a
                 href="#"
                 className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"
               >
                 Login
-              </a>
+              </a> */}
+              <Link
+                to="/"
+                className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"
+              >
+                Login
+              </Link>
             </p>
           </section>
         </div>
