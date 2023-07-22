@@ -1,20 +1,30 @@
-import React, { useState } from "react";
-import { FiSearch } from "react-icons/fi";
-import { AiFillMessage } from "react-icons/ai";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import PinnedConversation from "./PinnedConversation";
-import Conversation from "./Conversation";
-import { CgProfile, CgDarkMode } from "react-icons/cg";
-import { RiLogoutCircleFill } from "react-icons/ri";
-import logo from "../../assets/logoBg.jpg";
-import ChatBox from "../ChatBox/ChatBox";
+import React, { useState, useEffect } from 'react';
+import { FiSearch } from 'react-icons/fi';
+import { AiFillMessage } from 'react-icons/ai';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import PinnedConversation from './PinnedConversation';
+import Conversation from './Conversation';
+import { CgProfile, CgDarkMode } from 'react-icons/cg';
+import { RiLogoutCircleFill } from 'react-icons/ri';
+import logo from '../../assets/logoBg.jpg';
+import ChatBox from '../ChatBox/ChatBox';
+import { Link } from 'react-router-dom';
 
-function Home() {
+function Home({ setIsLoggedIn }) {
   const [menuVisible, setMenuVisible] = useState(false);
 
   const handleMenuToggle = () => {
     setMenuVisible((prevVisible) => !prevVisible);
   };
+
+  function handleLogout() {
+    //remove token upon logout
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userId');
+
+    //set login to false and redirect to login
+    setIsLoggedIn(false);
+  }
 
   return (
     <>
@@ -47,9 +57,11 @@ function Home() {
                 <hr />
                 <div className="hover:bg-tahiti-100 rounded-md flex pl-2 pt-2">
                   <CgProfile className="h-8 w-10 text-black mt-1" />
-                  <button className="block w-full text-left py-2 px-2 text-black text-lg">
-                    Profile
-                  </button>
+                  <Link to="/profile">
+                    <button className="block w-full text-left py-2 px-2 text-black text-lg">
+                      Profile
+                    </button>
+                  </Link>
                 </div>
 
                 <div className="hover:bg-tahiti-100 rounded-md flex pl-2 pt-2 ">
@@ -60,9 +72,11 @@ function Home() {
                 </div>
                 <div className="hover:bg-tahiti-100 rounded-md flex pl-2 pt-2 mb-20">
                   <RiLogoutCircleFill className="h-8 w-10 text-black mt-1" />
-                  <button className="block w-full text-left py-2 px-2 text-black text-lg">
-                    Logout
-                  </button>
+                  <Link to="/" onClick={handleLogout}>
+                    <button className="block w-full text-left py-2 px-2 text-black text-lg">
+                      Logout
+                    </button>
+                  </Link>
                 </div>
                 <hr />
                 <img src={logo} alt="logo" className="mt-5 h-20 mx-auto" />
