@@ -15,7 +15,7 @@ export const createChat = async (req, res) => {
 export const userChats = async (req, res) => {
     try {
         const chat = await ChatModel.find({
-            members: { $in: [req.params.userId] },
+            members: { $in: [req.params.id] },
         })
             .sort({ updatedAt: -1 })
             .select("-__v")
