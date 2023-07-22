@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import classes from "./Register.module.css";
 import logo from "../../assets/logoBg.jpg";
 import Login from "../Login/Login";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [form, setForm] = useState({
@@ -157,42 +158,44 @@ function Register() {
           <section className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
             <form onSubmit={onSubmit} className="space-y-6">
               <div className="mb-10">
-                <div>
-                  <div className="mt-2">
-                    <input
-                      className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6"
-                      type="text"
-                      id="firstname"
-                      name="firstname"
-                      value={firstname}
-                      placeholder="First Name"
-                      autoComplete="off"
-                      onChange={handleInputChange}
-                    />
-                    {errors.firstname && (
-                      <label className={classes.errorlabel}>
-                        {errors.firstname}
-                      </label>
-                    )}
+                <div className="flex lg:gap-x-2">
+                  <div>
+                    <div className="mt-2">
+                      <input
+                        className=" block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6"
+                        type="text"
+                        id="firstname"
+                        name="firstname"
+                        value={firstname}
+                        placeholder="First Name"
+                        autoComplete="off"
+                        onChange={handleInputChange}
+                      />
+                      {errors.firstname && (
+                        <label className={classes.errorlabel}>
+                          {errors.firstname}
+                        </label>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div className="mt-2">
-                    <input
-                      className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6"
-                      type="text"
-                      id="lastname"
-                      name="lastname"
-                      value={lastname}
-                      placeholder="Last Name"
-                      autoComplete="off"
-                      onChange={handleInputChange}
-                    />
-                    {errors.lastname && (
-                      <label className={classes.errorlabel}>
-                        {errors.lastname}
-                      </label>
-                    )}
+                  <div>
+                    <div className="mt-2">
+                      <input
+                        className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6"
+                        type="text"
+                        id="lastname"
+                        name="lastname"
+                        value={lastname}
+                        placeholder="Last Name"
+                        autoComplete="off"
+                        onChange={handleInputChange}
+                      />
+                      {errors.lastname && (
+                        <label className={classes.errorlabel}>
+                          {errors.lastname}
+                        </label>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div>
@@ -286,14 +289,20 @@ function Register() {
               </div> */}
               </div>
             </form>
-            <p className="mt-5 text-center text-lg text-black">
+            <p className="mt-5 lg:text-center lg:text-lg text-black">
               Already have an account?
-              <a
+              {/* <a
                 href="#"
                 className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"
               >
                 Login
-              </a>
+              </a> */}
+              <Link
+                to="/"
+                className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"
+              >
+                Log in
+              </Link>
             </p>
           </section>
         </div>
