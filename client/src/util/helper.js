@@ -14,7 +14,7 @@ export function formatDate(datetime) {
             minute: "2-digit",
         }).toLowerCase();
     } else if (timeDiff < oneWeek) {
-        return date.toLocaleTimeString([], { weekday: "short" });
+        return date.toLocaleDateString([], { weekday: "short" });
     } else if (timeDiff < oneYear) {
         return date.toLocaleDateString([], { month: "short", day: "numeric" });
     } else {
