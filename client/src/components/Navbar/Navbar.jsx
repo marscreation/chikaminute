@@ -28,7 +28,6 @@ function Navbar() {
   }, [])
 
   useEffect(() => {
-    console.log(theme)
     if (theme === "dark") {
       document.documentElement.classList.add("dark")
       document.querySelector('[data-toggle-icon="moon"]')?.classList.remove("hidden")
@@ -57,8 +56,8 @@ function Navbar() {
             id="user-dropdown"
             style={{ inset: '62px 0px auto auto'}}>
             <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">{User.firstname} {User.lastname}</span>
-              <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{User.email}</span>
+              <span className="block text-sm text-gray-900 dark:text-white">{User?.firstname} {User?.lastname}</span>
+              <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{User?.email}</span>
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
               <li>

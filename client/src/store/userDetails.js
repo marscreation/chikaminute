@@ -1,4 +1,11 @@
-const { firstname, lastname, email, id } = JSON.parse(
-    atob(sessionStorage.getItem("token").split(".")[1])
-);
-export const User = { id, firstname, lastname, email };
+function userData() {
+    try {
+        const user = JSON.parse(
+            atob(sessionStorage.getItem("token").split(".")[1])
+        );
+        return user
+    } catch (error) {
+        return {id: "", firstname: "", lastname: "", email: ""}
+    }
+}
+export const User = userData();
