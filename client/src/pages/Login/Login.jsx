@@ -1,23 +1,23 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import logo from '../../assets/logoBg.jpg';
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import logo from "../../assets/logoBg.jpg";
 
 function Login({ setIsLoggedIn }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'username') setUsername(value);
-    if (name === 'password') setPassword(value);
+    if (name === "username") setUsername(value);
+    if (name === "password") setPassword(value);
   };
 
   const validateForm = () => {
     const errors = {};
-    if (!username.trim()) errors.username = 'username is required';
-    if (!password.trim()) errors.password = 'Password is required';
+    if (!username.trim()) errors.username = "username is required";
+    if (!password.trim()) errors.password = "Password is required";
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -31,8 +31,8 @@ function Login({ setIsLoggedIn }) {
       const response = await fetch(
         `${import.meta.env.VITE_REACT_API_URL}/auth/login`,
         {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
         }
       );
@@ -43,12 +43,12 @@ function Login({ setIsLoggedIn }) {
         return;
       }
       if (result.token) {
-        sessionStorage.setItem('token', result.token);
-        sessionStorage.setItem('userId', result.user.id);
+        sessionStorage.setItem("token", result.token);
+        sessionStorage.setItem("userId", result.user.id);
         console.log(result);
         setIsLoggedIn(true);
-        navigate('/home');
-        alert('welcome');
+        navigate("/home");
+        alert("welcome");
       }
       if (result.error) {
         errors.login = result.error;
@@ -58,12 +58,12 @@ function Login({ setIsLoggedIn }) {
   };
 
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    const userId = sessionStorage.getItem('userId');
+    const token = sessionStorage.getItem("token");
+    const userId = sessionStorage.getItem("userId");
 
     if (token && userId) {
       setIsLoggedIn(true);
-      navigate('/home');
+      navigate("/home");
     }
   }, []);
 
@@ -134,7 +134,7 @@ function Login({ setIsLoggedIn }) {
               to="/register"
               className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"
             >
-              Login
+              Sign up
             </Link>
           </p>
         </div>

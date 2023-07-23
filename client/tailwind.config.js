@@ -14,6 +14,7 @@ export default {
           50: "#fafafa",
           100: "#f0f4f8",
           150: "#4cb5f9",
+          200: "#252738",
         },
       },
       fontSize: {
