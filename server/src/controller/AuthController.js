@@ -7,7 +7,7 @@ export const loginUser = async (req, res) => {
 
   try {
     const user = await UserModel.findOne({ username: username }).select(
-      'name email password'
+      'firstname lastname email password'
     );
 
     if (user) {
@@ -15,12 +15,12 @@ export const loginUser = async (req, res) => {
       if (!validity) {
         res.status(400).json({ message: 'Invalid password' });
       } else {
-        const { _id, name, email } = user._doc;
-        const token = jwt.sign({ id: _id, name, email }, process.env.JWT_KEY, {
+        const { _id, firstname, lastname, email } = user._doc;
+        const token = jwt.sign({ id: _id, firstname, lastname, email }, process.env.JWT_KEY, {
           expiresIn: process.env.JWT_EXPIRES_IN,
         });
 
-        res.status(200).json({ user: { id: _id, name, email }, token });
+        res.status(200).json({ user: { id: _id, firstname, lastname, email }, token });
       }
     } else {
       res.status(404).json('User not found');
