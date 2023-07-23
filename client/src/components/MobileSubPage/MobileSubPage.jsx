@@ -11,6 +11,7 @@ function MobileSubPage(props) {
                     <div className="grid h-full place-content-center font-bold text-2xl">
                         <p>{props.header}</p>
                     </div>
+                    {props.rightBtn && (<button className='back px-4 h-full absolute right-0 top-0' onClick={props.rightBtnClick}>{props.rightBtn}</button>)}
                 </div>
             </div>
             <div className="body overflow-y-auto h-screen py-2">
