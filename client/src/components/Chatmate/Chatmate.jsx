@@ -33,8 +33,8 @@ function Chatmate({ data, currentUserId }) {
                     </div>
                     <div className='relative flex-1 px-2'>
                         <p className="text-xs absolute right-1.5 top-0 py-1 text-gray-700">{data?.updatedAt ? formatDate(data.updatedAt) : 'time here'}</p>
-                        <p className="text-lg font-bold lg:ml-16 lg:-mt-12 pr-20 truncate">{userData?.firstname} {userData?.lastname}</p>
-                        <p className="text-sm lg:ml-16 pr-3 truncate">{data?.lastMessage ?? '@'}</p>
+                        <p className="text-lg font-bold pr-20 truncate">{userData?.firstname} {userData?.lastname}</p>
+                        <p className="text-sm pr-3 truncate">{data?.lastMessage ?? '@'}</p>
                     </div>
                 </div>)}
         </>
