@@ -1,19 +1,21 @@
-import { useState } from 'react';
-import classes from './EditProfile.module.css';
-import EditProfileButton from './ProfileComponents/EditProfileButton';
+import { useState } from "react";
+import classes from "./EditProfile.module.css";
+import EditProfileButton from "./ProfileComponents/EditProfileButton";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate, Link } from "react-router-dom";
 
 function EditProfile() {
   const [form, setForm] = useState({
-    firstname: '',
-    lastname: '',
-    username: '',
-    email: '',
+    firstname: "",
+    lastname: "",
+    username: "",
+    email: "",
   });
 
   const [errors, setErrors] = useState({});
 
-  const userId = sessionStorage.getItem('userId');
-  const token = sessionStorage.getItem('token');
+  const userId = sessionStorage.getItem("userId");
+  const token = sessionStorage.getItem("token");
 
   const handleChange = (e) => {
     setForm((prevForm) => ({
@@ -29,9 +31,9 @@ function EditProfile() {
       setErrors({});
 
       const response = await fetch(`http://localhost:3000/user/${userId}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -44,37 +46,48 @@ function EditProfile() {
 
       const data = await response.json();
       if (response.ok) {
-        alert('Profile Updated Successfully');
+        alert("Profile Updated Successfully");
 
         setForm({
-          firstname: '',
-          lastname: '',
-          username: '',
-          email: '',
+          firstname: "",
+          lastname: "",
+          username: "",
+          email: "",
         });
       } else {
         //validate username if username already exist
-        if (data.message === 'User already exists') {
+        if (data.message === "User already exists") {
           setErrors((previous) => ({
             ...previous,
-            username: 'Username already used',
+            username: "Username already used",
           }));
         }
         //validate email if email already used
-        if (data.message === 'Email already exists') {
+        if (data.message === "Email already exists") {
           setErrors((previous) => ({
             ...previous,
-            email: 'Email already used',
+            email: "Email already used",
           }));
         }
       }
     } catch (error) {
-      console.log('Failed to update', error);
+      console.log("Failed to update", error);
     }
   };
   return (
-    <div className="grid min-h-screen font-poppins">
-      <div className="lg:pl-40 flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="min-h-screen font-poppins">
+      {/* <div className=" h-16 lg:h-20 w-full bg-tahiti-100 flex lg:justify-evenly font-poppins">
+        <Link to="/profile">
+          <button>
+            <IoIosArrowBack className="w-8 h-8 lg:w-8 lg:h-8 ml-2 lg:ml-8 mt-4 lg:mt-6" />
+          </button>
+        </Link>
+        <h1 className="my-auto text-3xl font-semibold tracking-wide mx-auto">
+          Edit Profile
+        </h1>
+        <button className="font-bold mr-2 lg:mr-12">Done</button>
+      </div> */}
+      <div className="lg:pl-40 flex min-h-full flex-col px-6 lg:px-8 mt-6 lg:mt-12">
         <h1 className="font-extrabold lg:text-4xl text-2xl">
           Profile Information
         </h1>
@@ -125,7 +138,7 @@ function EditProfile() {
           </div>
           <div className="mb-4 lg:flex">
             <label className="lg:pr-10 lg:w-3/12 text-center lg:py-2">
-              Email:{' '}
+              Email:{" "}
             </label>
             <input
               type="email"

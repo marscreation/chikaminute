@@ -5,6 +5,7 @@ import person from "../../assets/person.png";
 import EditProfileButton from "../EditProfile/ProfileComponents/EditProfileButton";
 import { BiEdit } from "react-icons/bi";
 import { PiKeyBold } from "react-icons/pi";
+import { IoIosArrowBack } from "react-icons/io";
 
 function EditProfile() {
   const [userData, setUserData] = useState(null);
@@ -38,17 +39,23 @@ function EditProfile() {
 
   return (
     <>
+      {/* <div className=" h-16 lg:h-20 w-full bg-tahiti-100 flex font-poppins">
+        <Link to="/home">
+          <button>
+            <IoIosArrowBack className="w-8 h-8 lg:w-8 lg:h-8 ml-2 lg:ml-5 mt-4 lg:mt-6" />
+          </button>
+        </Link>
+        <h1 className="my-auto text-3xl font-semibold tracking-wide mx-auto">
+          Profile
+        </h1>
+      </div> */}
       <div className="grid min-h-screen font-poppins">
-        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex min-h-full flex-col px-6 lg:px-8">
           {userData ? (
             <>
-              <section className="h-auto">
+              <section className="h-auto mt-3 lg:mt-5">
                 <div className="float-right lg:mr-20 lg:mb-5">
                   <Link to="/editprofile">
-                    {/* <EditProfileButton
-                      className="mb-10"
-                      buttonName="Edit Profile"
-                    /> */}
                     <button>
                       <BiEdit className="w-8 h-8 lg:w-8 lg:h-8" />
                     </button>
