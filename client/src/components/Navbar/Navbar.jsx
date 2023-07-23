@@ -5,9 +5,18 @@ import logo from "../../assets/logo.svg";
 
 function Navbar() {
   const [theme, setTheme] = useState(null);
+  const [userDropMenu, setUserDropMenu] = useState("hidden")
 
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
+  }
+
+  const handleUserDropDown = () => {
+    if (userDropMenu === 'hidden') {
+      setUserDropMenu("block")
+    } else {
+      setUserDropMenu("hidden")
+    }
   }
 
   useEffect(() => {
@@ -39,12 +48,12 @@ function Navbar() {
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ChikaMinute</span>
         </a>
         <div className="flex items-center md:order-2">
-          <button type="button" className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+          <button type="button" onClick={handleUserDropDown} className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
             <span className="sr-only">Open user menu</span>
             <img className="w-8 h-8 rounded-full" src={person2} alt="user photo" />
           </button>
           {/* <!-- Dropdown menu --> */}
-          <div className="z-50 block absolute m-0 max-w-xs text-base list-none bg-white divide-y divide-gray-100 rounded-b-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+          <div className={userDropMenu + " z-50 absolute m-0 max-w-xs text-base list-none bg-white divide-y divide-gray-100 rounded-b-lg shadow dark:bg-gray-700 dark:divide-gray-600"}
             id="user-dropdown"
             style={{ inset: '62px 0px auto auto'}}>
             <div className="px-4 py-3">
