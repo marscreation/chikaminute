@@ -9,7 +9,7 @@ function Home() {
     <>
       <Navbar />
       <ChatProvider>
-        <div className="chat sm:grid relative">
+        <div className="chat sm:grid relative font-poppins">
           <section className="sidebar">
             <ChatList />
           </section>

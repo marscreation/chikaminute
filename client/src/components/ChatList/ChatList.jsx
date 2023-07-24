@@ -20,7 +20,7 @@ function ChatList() {
 
   return (
     <div className="w-full py-3">
-      <label className="font-bold mt-0.5 ml-2 text-slate-500 lg:mt-11 lg:ml-4">
+      <label className="font-bold mt-0.5 ml-2 text-slate-500 lg:mt-11 lg:ml-6">
         Conversation
       </label>
       {chats.map((chat) => (

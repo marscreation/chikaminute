@@ -1,29 +1,35 @@
 @media (min-width: 768px) {
-    div.chat {
-        grid-template-columns: minmax(20rem, 24rem) auto;
-    }
-    div.chat > .chatbox.show {
-        position: inherit;
-    }
-    div.chat > .sidebar ,
-    div.chat > .chatbox {
-        height: calc(100vh - 66px);
-    }
+  div.chat {
+    grid-template-columns: minmax(30rem, 24rem) auto;
+  }
+  div.chat > .chatbox.show {
+    position: inherit;
+  }
+  div.chat > .sidebar,
+  div.chat > .chatbox {
+    height: calc(100vh - 66px);
+  }
+  div.chat > .sidebar {
+    background-color: #f0f4f8;
+  }
+  .chatbox {
+    background-color: #ffffff;
+  }
 }
 
 @media (max-width: 640px) {
-    div.chat > .sidebar {
-        height: calc(100vh - 66px);
-    }
-    div.chat > .chatbox {
-        top: 0;
-        left: 100%;
-        width: 100%;
-        background-color: white;
-        position: absolute;
-        transition: left 1s;
-    }
-    div.chat > .chatbox.show {
-        left: 0;
-    }
+  div.chat > .sidebar {
+    height: calc(100vh - 66px);
+  }
+  div.chat > .chatbox {
+    top: 0;
+    left: 100%;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    transition: left 1s;
+  }
+  div.chat > .chatbox.show {
+    left: 0;
+  }
 }
