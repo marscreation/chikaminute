@@ -1,0 +1,3 @@
+.chatbox-body{
+    height: calc(100% - 140px - 88px);
+}

@@ -5,7 +5,7 @@ function userData() {
         );
         return user
     } catch (error) {
-        return {id: "", firstname: "", lastname: "", email: ""}
+        return {}
     }
 }
 export const User = userData();

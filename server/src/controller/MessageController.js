@@ -1,4 +1,5 @@
 import MessageModel from "../models/messageModel.js";
+import ChateModel from "../models/chatModel.js";
 
 export const addMessage = async (req, res) => {
     const { chatId, senderId, text } = req.body;
@@ -9,6 +10,11 @@ export const addMessage = async (req, res) => {
     });
     try {
         const result = await message.save();
+        const res2 = await ChateModel.findOneAndUpdate(
+            { _id: chatId },
+            { $set: { lastMessage: text } },
+            { new: true }
+        );
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json(error);
