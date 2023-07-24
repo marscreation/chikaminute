@@ -1,87 +1,69 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import female from "../../assets/female2.png";
 import ReceivedChat from "./ReceivedChat";
 import SentChat from "./SentChat";
+import "./ChatBox.css"
+import { useChatContext } from "../../context/ChatContext";
+import { User } from "../../store/userDetails";
+import { sendMessage } from "../../api/MessageRequest";
 
 function ChatBox() {
+  const { conversation, chatId, chatmateInfo } = useChatContext()
+  const [messages, setMessages] = useState([])
+  const [chatSelected, setChatSelected] = useState(false)
+  const messageRef = useRef("")
+
+  const handleSendButton = async () => {
+    if (messageRef.current.value == "") return;
+    const textMessage = messageRef.current.value;
+    const info = await sendMessage({ chatId, message: textMessage })
+    setMessages(message => [...message, { createdAt: Date.now(), senderId: User.id, text: textMessage, _id: info._id }])
+    messageRef.current.value = ""
+  }
+
+  useEffect(() => {
+    if (conversation?.length > 0) {
+      setMessages(conversation)
+      setChatSelected(true)
+    } else {
+      setMessages([])
+      setChatSelected(false)
+    }
+  }, [conversation])
+
   return (
-    <div className=" lg:pl-0 p-3 w-full h-auto text-center font-poppins lg:w-7/12 lg:-mt-100 float-right">
-      <div className=" p:3 lg:p-5 overflow-y-auto lg:h-96">
-        <h1 className="font-bold text-3xl">Marj Faustino</h1>
-        <span className="text-xxs mx-auto">Today 10:27am</span>
-
-        <ReceivedChat />
-        <SentChat />
-        <div className="clear-both">
-          <div className="h-auto mt-3 float-right">
-            <p className="bg-tahiti-100 h-auto w-auto p-2 rounded-xl">What</p>
-          </div>
+    <>
+      {chatSelected ? (<div className="chatbox-header text-black shadow-lg flex items-center">
+        <div className="sm:hidden flex-none p-3">
+          <button className="p-2 border-2 text-blue-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </button>
         </div>
-        <div className="clear-both">
-          <div className="h-auto flex mt-3">
-            <img
-              src={female}
-              alt="logo"
-              className="border-2 border-white rounded-3xl h-8 w-8 lg:h-12 lg:w-12 mr-3"
-            />
-            <p className="bg-tahiti-150 h-auto w-auto p-2 rounded-xl">
-              I'm here at the cafe.
-            </p>
-          </div>
+        <div className="flex-none p-3">
+          <img src={female} alt="" className="border-2 border-white rounded-3xl h-10 w-10 lg:h-12 lg:w-12" />
         </div>
-        <div className="clear-both">
-          <div className="h-auto mt-3 float-right">
-            <p className="bg-tahiti-100 h-auto w-auto p-2 rounded-xl">
-              Ok, see you there.
-            </p>
-          </div>
+        <div className='relative flex-1'>
+          <h1 className="font-bold text-left text-2xl">{chatmateInfo?.firstname} {chatmateInfo?.lastname}</h1>
+          <p className="text-xs text-left">Active now</p>
         </div>
-
-        <div className="clear-both">
-          <div className="h-auto flex mt-3">
-            <img
-              src={female}
-              alt="logo"
-              className="border-2 border-white rounded-3xl h-8 w-8 lg:h-12 lg:w-12 mr-3"
-            />
-            <p className="bg-tahiti-150 h-auto w-auto p-2 rounded-xl">
-              I'm here at the cafe.
-            </p>
-          </div>
-        </div>
-        <div className="clear-both">
-          <div className="h-auto flex mt-3">
-            <img
-              src={female}
-              alt="logo"
-              className="border-2 border-white rounded-3xl h-8 w-8 lg:h-12 lg:w-12 mr-3"
-            />
-            <p className="bg-tahiti-150 h-auto w-auto p-2 rounded-xl">
-              I'm here at the cafe.
-            </p>
-          </div>
-        </div>
-        <div className="clear-both">
-          <div className="h-auto mt-3 float-right">
-            <p className="bg-tahiti-100 h-auto w-auto p-2 rounded-xl">
-              Ok, see you there.
-            </p>
-          </div>
-        </div>
-        <div className="clear-both">
-          <div className="h-auto mt-3 float-right">
-            <p className="bg-tahiti-100 h-auto w-auto p-2 rounded-xl">
-              Ok, see you there.
-            </p>
-          </div>
-        </div>
+      </div>) : (<div className="text-2xl text-center font-bold text-slate-500 font-poppins">No converation yet</div>)}
+      <div className="chatbox-body pr-3 overflow-y-auto flex-1">
+        {chatSelected && messages?.length > 0 && messages.map(message => {
+          console.log(User.id)
+          if (message.senderId == User.id) {
+            return (<SentChat key={message._id} data={message} />)
+          }
+          return (<ReceivedChat key={message._id} data={message} />)
+        })}
       </div>
-      <div className="flex mt-3">
+      <div className="flex py-3 px-1">
         <label
           htmlFor="image-upload"
-          className="bg-tahiti-150 h-auto w-auto p-2 rounded-xl ml-2 cursor-pointer"
+          className="p-3 cursor-pointer rounded-md bg-tahiti-150"
         >
-          Attach Image
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>
         </label>
         <input
           type="file"
@@ -90,17 +72,17 @@ function ChatBox() {
           className="hidden"
         />
 
-        <textarea
+        <textarea ref={messageRef}
           rows="2" // Set the number of visible rows to 2 (can be adjusted as needed)
-          className="bg-tahiti-100 h-auto w-full rounded-xl pl-3 pr-10 py-2 text-black resize-none"
+          className="bg-tahiti-100 px-3 text-black resize-none flex-1"
           placeholder="Type your reply..."
         />
 
-        <button className="bg-tahiti-150 h-auto w-auto p-2 rounded-xl ml-2">
-          Send
+        <button className="p-4 cursor-pointer" onClick={handleSendButton}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M16.1 260.2c-22.6 12.9-20.5 47.3 3.6 57.3L160 376V479.3c0 18.1 14.6 32.7 32.7 32.7c9.7 0 18.9-4.3 25.1-11.8l62-74.3 123.9 51.6c18.9 7.9 40.8-4.5 43.9-24.7l64-416c1.9-12.1-3.4-24.3-13.5-31.2s-23.3-7.5-34-1.4l-448 256zm52.1 25.5L409.7 90.6 190.1 336l1.2 1L68.2 285.7zM403.3 425.4L236.7 355.9 450.8 116.6 403.3 425.4z" /></svg>
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
