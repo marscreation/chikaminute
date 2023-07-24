@@ -8,6 +8,7 @@ import logo from "../../assets/logo.svg";
 function Navbar() {
   const [theme, setTheme] = useState(null);
   const [userDropMenu, setUserDropMenu] = useState("hidden");
+  const [settingsDropDownMenu, setSettingsDropDownMenu] = useState("hidden");
 
   const { isLoggedIn, setIsLoggedIn } = useAuthContext();
   const navigate = useNavigate();
@@ -31,6 +32,14 @@ function Navbar() {
       setUserDropMenu("block");
     } else {
       setUserDropMenu("hidden");
+    }
+  };
+
+  const handleSettingsDropDown = () => {
+    if (settingsDropDownMenu === "hidden") {
+      setSettingsDropDownMenu("block");
+    } else {
+      setSettingsDropDownMenu("hidden");
     }
   };
 
@@ -146,14 +155,50 @@ function Navbar() {
                 </div>
               </li>
               <li>
-                <Link
-                  to="/"
+                <button
                   className="block px-4 py-2 text-sm text-gray-700
                   hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
                   dark:hover:text-white"
+                  id="settings-menu-button"
+                  aria-expanded="false"
+                  data-dropdown-toggle="settings-dropdown"
+                  data-dropdown-placement="bottom"
+                  onClick={handleSettingsDropDown}
                 >
                   Settings
-                </Link>
+                </button>
+                {/* settings drop down menu */}
+                <div
+                  className={
+                    settingsDropDownMenu +
+                    " z-50 absolute m-0 max-w-xs text-base list-none bg-white divide-y divide-gray-100 rounded-b-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                  }
+                  id="settings-dropdown"
+                  style={{ inset: "62px 0px auto auto" }}
+                >
+                  {/* list of settings -> Edit Profile, Change password */}
+                  <ul className="py-2" aria-labelledby="user-menu-button">
+                    {/* Edit Profile Link */}
+                    <Link
+                      to="/editprofile"
+                      className="block px-4 py-2 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  dark:hover:text-white"
+                    >
+                      <li>Edit Profile</li>
+                    </Link>
+                    {/* Change Password Link */}
+                    <Link
+                      to="/changepassword"
+                      className="block px-4 py-2 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  dark:hover:text-white"
+                    >
+                      <li>Change Password</li>
+                    </Link>
+                  </ul>
+                  {/*  */}
+                </div>
               </li>
               <li>
                 <button
