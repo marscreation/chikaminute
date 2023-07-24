@@ -1,11 +1,26 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { User } from "../../store/userDetails";
+import { useAuthContext } from "../../context/AuthContext";
 import person2 from "../../assets/person2.png";
 import logo from "../../assets/logo.svg";
 
 function Navbar() {
   const [theme, setTheme] = useState(null);
   const [userDropMenu, setUserDropMenu] = useState("hidden");
+
+  const { isLoggedIn, setIsLoggedIn } = useAuthContext();
+  const navigate = useNavigate();
+
+  //remove token and userId upon logout and redirect to Login page
+  function handleLogout() {
+    alert("Sign out successful");
+    setIsLoggedIn(false);
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userId");
+
+    navigate("/");
+  }
 
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -87,12 +102,14 @@ function Navbar() {
             style={{ inset: "62px 0px auto auto" }}
           >
             <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">
-                {User?.firstname} {User?.lastname}
-              </span>
-              <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                {User?.email}
-              </span>
+              <Link to="/profile">
+                <span className="block text-sm text-gray-900 dark:text-white">
+                  {User?.firstname} {User?.lastname}
+                </span>
+                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                  {User?.email}
+                </span>
+              </Link>
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
               <li>
@@ -129,20 +146,24 @@ function Navbar() {
                 </div>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                <Link
+                  to="/"
+                  className="block px-4 py-2 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  dark:hover:text-white"
                 >
                   Settings
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <button
+                  onClick={handleLogout}
+                  to="/"
                   href="#"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Sign out
-                </a>
+                </button>
               </li>
             </ul>
           </div>
