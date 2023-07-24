@@ -19,10 +19,10 @@ function ChatList() {
   }, []);
 
   return (
-    <div className="w-full py-3">
-      <label className="font-bold mt-0.5 ml-2 text-slate-500 lg:mt-11 lg:ml-4">
+    <div className="w-full">
+      <div className="font-bold p-2 text-slate-500 dark:text-slate-300">
         Conversation
-      </label>
+      </div>
       {chats.map((chat) => (
         <Chatmate key={chat._id} data={chat} currentUserId={userId} />
       ))}

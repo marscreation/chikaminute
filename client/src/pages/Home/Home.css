@@ -7,13 +7,13 @@
     }
     div.chat > .sidebar ,
     div.chat > .chatbox {
-        height: calc(100vh - 66px);
+        height: calc(100vh - 73px);
     }
 }
 
 @media (max-width: 640px) {
     div.chat > .sidebar {
-        height: calc(100vh - 66px);
+        height: calc(100vh - 73px);
     }
     div.chat > .chatbox {
         top: 0;

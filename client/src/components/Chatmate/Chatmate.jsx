@@ -31,16 +31,17 @@ function Chatmate({ data, currentUserId }) {
     return (
         <>
             {userData &&
-                (<div className="text-black border-b-2 flex items-center" onClick={() => getConversation(userData)}>
-                    <div className='flex-none p-3'>
+                (<div className="text-black flex items-center dark:bg-slate-600 cursor-pointer" onClick={() => getConversation(userData)}>
+                    <div className='flex-none p-3 relative'>
+                        <span class="contact-status online rounded-full absolute left-0 w-2 h-2 ml-3 bg-green-500"></span>
                         <img
                             src={userData?.profilePicture ? import.meta.env.VITE_REACT_PUBLIC_FOLDER + userData.profilePicture : person2}
                             alt="profile photo"
-                            className="border-2 border-white rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
+                            className="border-2 border-white dark:border-none rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
                         />
                     </div>
-                    <div className='relative flex-1 px-2'>
-                        <p className="text-xs absolute right-3 top-0 py-1 text-gray-700">{data?.updatedAt ? formatDate(data.updatedAt) : 'time here'}</p>
+                    <div className='relative flex-1 px-2  dark:text-slate-50'>
+                        <p className="text-xs absolute right-3 top-0 py-1 text-gray-700 dark:text-slate-300">{data?.updatedAt ? formatDate(data.updatedAt) : 'time here'}</p>
                         <p className="text-lg font-bold pr-20 truncate">{userData?.firstname} {userData?.lastname}</p>
                         <p className="text-sm pr-3 truncate">{data?.lastMessage ?? '@'}</p>
                     </div>
