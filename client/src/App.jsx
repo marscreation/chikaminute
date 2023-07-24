@@ -24,11 +24,25 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/home" element={<PrivateRoute element={Home} />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/editprofile" element={<EditProfile />} />
-          <Route path="/changepassword" element={<ChangePassword />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute element={Home} setIsLoggedIn={setIsLoggedIn} />
+            }
+          />
+          <Route
+            path="/register"
+            element={<PrivateRoute element={Register} />}
+          />
+          <Route path="/profile" element={<PrivateRoute element={Profile} />} />
+          <Route
+            path="/editprofile"
+            element={<PrivateRoute element={EditProfile} />}
+          />
+          <Route
+            path="/changepassword"
+            element={<PrivateRoute element={ChangePassword} />}
+          />
         </Routes>
       </Router>
     </>
