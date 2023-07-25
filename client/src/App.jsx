@@ -18,6 +18,8 @@ function App() {
 
     if (isLoggedIn && window.location.pathname === "/register") {
       return <Navigate to="/home" replace />;
+    } else if (!isLoggedIn && window.location.pathname === "/register") {
+      return <Element />;
     }
     return isLoggedIn ? <Element /> : <Navigate to="/" replace />;
   }
