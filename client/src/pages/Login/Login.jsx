@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 import logo from "../../assets/logoBg.jpg";
 
-function Login({ setIsLoggedIn }) {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  const { isLoggedIn, setIsLoggedIn } = useAuthContext();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

@@ -3,6 +3,7 @@
  *@param footerContent String An to be placed on footer area
  **/
 import { IoIosArrowBack } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 function MobileSubPage(props) {
   return (
@@ -10,19 +11,25 @@ function MobileSubPage(props) {
       <div className="h-16 lg:h-20 w-full bg-tahiti-100">
         <div className="header relative">
           {/* <button className="back px-4 h-full absolute left-0">BACK</button> */}
-          <button>
-            <IoIosArrowBack className="w-8 h-8 lg:w-8 lg:h-8 ml-2 lg:ml-5 mt-4" />
-          </button>
+          <Link to="/home">
+            <button>
+              <IoIosArrowBack className="w-8 h-8 lg:w-8 lg:h-8 ml-2 lg:ml-5 mt-4" />
+            </button>
+          </Link>
           <div className="grid place-content-center -mt-10 font-bold text-xl">
             <p className={props.fontSize}>{props.header}</p>
           </div>
           {props.rightBtn && (
-            <button
-              className="back lg:px-4 mr-3 mt-2 h-full absolute right-0 top-0 text-xl"
-              onClick={props.rightBtnClick}
-            >
-              {props.rightBtn}
-            </button>
+            // need to update this
+            // add prompt to discard changes or something...
+            <Link to="/home">
+              <button
+                className="back lg:px-4 mr-3 mt-2 h-full absolute right-0 top-0 text-xl"
+                onClick={props.rightBtnClick}
+              >
+                {props.rightBtn}
+              </button>
+            </Link>
           )}
         </div>
       </div>

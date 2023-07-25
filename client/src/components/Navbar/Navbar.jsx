@@ -1,11 +1,27 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { User } from "../../store/userDetails";
+import { useAuthContext } from "../../context/AuthContext";
 import person2 from "../../assets/person2.png";
 import logo from "../../assets/logo.svg";
 
 function Navbar() {
   const [theme, setTheme] = useState(null);
   const [userDropMenu, setUserDropMenu] = useState("hidden");
+  const [settingsDropDownMenu, setSettingsDropDownMenu] = useState("hidden");
+
+  const { isLoggedIn, setIsLoggedIn } = useAuthContext();
+  const navigate = useNavigate();
+
+  //remove token and userId upon logout and redirect to Login page
+  function handleLogout() {
+    alert("Sign out successful");
+    setIsLoggedIn(false);
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userId");
+
+    navigate("/");
+  }
 
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -16,6 +32,14 @@ function Navbar() {
       setUserDropMenu("block");
     } else {
       setUserDropMenu("hidden");
+    }
+  };
+
+  const handleSettingsDropDown = () => {
+    if (settingsDropDownMenu === "hidden") {
+      setSettingsDropDownMenu("block");
+    } else {
+      setSettingsDropDownMenu("hidden");
     }
   };
 
@@ -32,18 +56,18 @@ function Navbar() {
       document.documentElement.classList.add("dark");
       document
         .querySelector('[data-toggle-icon="moon"]')
-        ?.classList.remove("hidden");
+        ?.classList.add("hidden");
       document
         .querySelector('[data-toggle-icon="sun"]')
-        ?.classList.add("hidden");
+        ?.classList.remove("hidden");
     } else {
       document.documentElement.classList.remove("dark");
       document
         .querySelector('[data-toggle-icon="moon"]')
-        ?.classList.add("hidden");
+        ?.classList.remove("hidden");
       document
         .querySelector('[data-toggle-icon="sun"]')
-        ?.classList.remove("hidden");
+        ?.classList.add("hidden");
     }
   }, [theme]);
 
@@ -52,6 +76,7 @@ function Navbar() {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 pr-2">
         <a href="#" className="flex items-center">
           <img src={logo} className="h-10 mr-3 " alt="Chika Minute Logo" />
+
           <span className="self-center text-3xl font-semibold whitespace-nowrap text-tahiti-150 dark:text-white">
             ChikaMinute
           </span>
@@ -83,12 +108,14 @@ function Navbar() {
             style={{ inset: "62px 0px auto auto" }}
           >
             <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">
-                {User?.firstname} {User?.lastname}
-              </span>
-              <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                {User?.email}
-              </span>
+              <Link to="/profile">
+                <span className="block text-sm text-gray-900 dark:text-white">
+                  {User?.firstname} {User?.lastname}
+                </span>
+                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                  {User?.email}
+                </span>
+              </Link>
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
               <li>
@@ -125,20 +152,60 @@ function Navbar() {
                 </div>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                <button
+                  className="block px-4 py-2 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  dark:hover:text-white"
+                  id="settings-menu-button"
+                  aria-expanded="false"
+                  data-dropdown-toggle="settings-dropdown"
+                  data-dropdown-placement="bottom"
+                  onClick={handleSettingsDropDown}
                 >
                   Settings
-                </a>
+                </button>
+                {/* settings drop down menu */}
+                <div
+                  className={
+                    settingsDropDownMenu +
+                    " z-50 absolute m-0 max-w-xs text-base list-none bg-white divide-y divide-gray-100 rounded-b-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                  }
+                  id="settings-dropdown"
+                  style={{ inset: "62px 0px auto auto" }}
+                >
+                  {/* list of settings -> Edit Profile, Change password */}
+                  <ul className="py-2" aria-labelledby="user-menu-button">
+                    {/* Edit Profile Link */}
+                    <Link
+                      to="/editprofile"
+                      className="block px-4 py-2 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  dark:hover:text-white"
+                    >
+                      <li>Edit Profile</li>
+                    </Link>
+                    {/* Change Password Link */}
+                    <Link
+                      to="/changepassword"
+                      className="block px-4 py-2 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  dark:hover:text-white"
+                    >
+                      <li>Change Password</li>
+                    </Link>
+                  </ul>
+                  {/*  */}
+                </div>
               </li>
               <li>
-                <a
+                <button
+                  onClick={handleLogout}
+                  to="/"
                   href="#"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Sign out
-                </a>
+                </button>
               </li>
             </ul>
           </div>
