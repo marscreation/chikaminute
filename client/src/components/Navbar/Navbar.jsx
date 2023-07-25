@@ -4,9 +4,10 @@ import { User } from "../../store/userDetails";
 import { useAuthContext } from "../../context/AuthContext";
 import person2 from "../../assets/person2.png";
 import logo from "../../assets/logo.svg";
+import { IoIosArrowBack } from "react-icons/io";
 
 function Navbar() {
-  const [theme, setTheme] = useState(null);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const [userDropMenu, setUserDropMenu] = useState("hidden");
   const [settingsDropDownMenu, setSettingsDropDownMenu] = useState("hidden");
 
@@ -24,7 +25,9 @@ function Navbar() {
   }
 
   const handleThemeSwitch = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    const updatedTheme = theme === "dark" ? "light" : "dark";
+    setTheme(updatedTheme);
+    localStorage.setItem("theme", updatedTheme);
   };
 
   const handleUserDropDown = () => {
@@ -102,22 +105,74 @@ function Navbar() {
           <div
             className={
               userDropMenu +
-              " z-50 absolute m-0 max-w-xs text-base list-none bg-white divide-y divide-gray-100 rounded-b-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              " z-50 absolute m-0 lg:w-60 max-w-s text-base list-none bg-white divide-y divide-gray-100 rounded-b-lg shadow dark:bg-gray-700 dark:divide-gray-600"
             }
             id="user-dropdown"
             style={{ inset: "62px 0px auto auto" }}
           >
             <div className="px-4 py-3">
               <Link to="/profile">
-                <span className="block text-sm text-gray-900 dark:text-white">
-                  {User?.firstname} {User?.lastname}
-                </span>
-                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                  {User?.email}
-                </span>
+                <div className="flex">
+                  <div>
+                    <img
+                      className="w-8 lg:w-10 h-8 lg:h-10 mr-1 rounded-full"
+                      src={person2}
+                      alt="user photo"
+                    />
+                  </div>
+                  <div>
+                    <span className="block text-sm text-gray-900 dark:text-white">
+                      {User?.firstname} {User?.lastname}
+                    </span>
+                    <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                      {User?.email}
+                    </span>
+                  </div>
+                </div>
               </Link>
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <button
+                  className="block px-4 py-2 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  dark:hover:text-white"
+                  id="settings-menu-button"
+                  aria-expanded="false"
+                  data-dropdown-toggle="settings-dropdown"
+                  data-dropdown-placement="bottom"
+                  onClick={handleSettingsDropDown}
+                >
+                  Settings
+                </button>
+              </li>
+              <li>
+                {/* settings drop down menu */}
+                <div
+                  className={settingsDropDownMenu}
+                  id="settings-dropdown"
+                  style={{ inset: "62px 0px auto auto" }}
+                >
+                  {/* list of settings -> Edit Profile, Change password */}
+                  <ul className="py-2" aria-labelledby="user-menu-button">
+                    {/* Edit Profile Link */}
+                    <Link
+                      to="/editprofile"
+                      className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <li>Edit Profile</li>
+                    </Link>
+                    {/* Change Password Link */}
+                    <Link
+                      to="/changepassword"
+                      className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <li>Change Password</li>
+                    </Link>
+                  </ul>
+                  {/*  */}
+                </div>
+              </li>
               <li>
                 <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                   <button
@@ -149,52 +204,6 @@ function Navbar() {
                     </svg>
                     <span className="sr-only">Toggle dark/light mode</span>
                   </button>
-                </div>
-              </li>
-              <li>
-                <button
-                  className="block px-4 py-2 text-sm text-gray-700
-                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
-                  dark:hover:text-white"
-                  id="settings-menu-button"
-                  aria-expanded="false"
-                  data-dropdown-toggle="settings-dropdown"
-                  data-dropdown-placement="bottom"
-                  onClick={handleSettingsDropDown}
-                >
-                  Settings
-                </button>
-                {/* settings drop down menu */}
-                <div
-                  className={
-                    settingsDropDownMenu +
-                    " z-50 absolute m-0 max-w-xs text-base list-none bg-white divide-y divide-gray-100 rounded-b-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-                  }
-                  id="settings-dropdown"
-                  style={{ inset: "62px 0px auto auto" }}
-                >
-                  {/* list of settings -> Edit Profile, Change password */}
-                  <ul className="py-2" aria-labelledby="user-menu-button">
-                    {/* Edit Profile Link */}
-                    <Link
-                      to="/editprofile"
-                      className="block px-4 py-2 text-sm text-gray-700
-                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
-                  dark:hover:text-white"
-                    >
-                      <li>Edit Profile</li>
-                    </Link>
-                    {/* Change Password Link */}
-                    <Link
-                      to="/changepassword"
-                      className="block px-4 py-2 text-sm text-gray-700
-                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
-                  dark:hover:text-white"
-                    >
-                      <li>Change Password</li>
-                    </Link>
-                  </ul>
-                  {/*  */}
                 </div>
               </li>
               <li>
