@@ -12,14 +12,24 @@
   div.chat > .sidebar {
     background-color: #f0f4f8;
   }
+  .dark div.chat > .sidebar {
+    background-color: #252738;
+  }
   .chatbox {
     background-color: #ffffff;
+  }
+  .dark .chatbox {
+    background-color: #101223;
   }
 }
 
 @media (max-width: 640px) {
   div.chat > .sidebar {
     height: calc(100vh - 66px);
+    background-color: #f0f4f8;
+  }
+  .dark div.chat > .sidebar {
+    background-color: #252738;
   }
   div.chat > .chatbox {
     top: 0;
@@ -31,5 +41,12 @@
   }
   div.chat > .chatbox.show {
     left: 0;
+  }
+  .dark div.chat > .chatbox {
+    background-color: #252738;
+  }
+
+  .dark div.chat > .chatbox {
+    background-color: #252738;
   }
 }

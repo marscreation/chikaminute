@@ -4,7 +4,7 @@ function SentChat({ data }) {
   return (
     <div className="clear-both">
       <div className="h-auto mt-3 float-right">
-        <p className="bg-tahiti-100 h-auto w-auto rounded-xl p-2">
+        <p className="bg-tahiti-100 dark:text-white dark:bg-tahiti-150 h-auto w-auto rounded-xl p-2">
           {data.text}
         </p>
       </div>

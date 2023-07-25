@@ -41,9 +41,9 @@ function Chatmate({ data, currentUserId }) {
         <div
           className={`cursor-pointer ${
             selected
-              ? "bg-white ml-2 rounded-l-lg"
-              : "lg:bg-tahiti-100 rounded-none"
-          } p-2 rounded-l-lg text-black border-b-2 flex items-center`}
+              ? "bg-white ml-2 rounded-l-lg dark:bg-tahiti-300"
+              : "bg-tahiti-100 rounded-none dark:bg-tahiti-200"
+          } p-2 rounded-l-lg text-black dark:text-white border-b-2 dark:border-b-gray-500 flex items-center`}
           onClick={() => getConversation(userData)}
         >
           <div className="flex-none p-3">
@@ -55,11 +55,11 @@ function Chatmate({ data, currentUserId }) {
                   : person2
               }
               alt="profile photo"
-              className="border-2 border-white rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
+              className="border-2 border-white dark:border-gray-500 rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
             />
           </div>
           <div className="relative flex-1 px-2">
-            <p className="text-xs absolute right-3 top-0 py-1 text-gray-700">
+            <p className="text-xs absolute right-3 top-0 py-1 text-gray-700 dark:text-gray-500">
               {data?.updatedAt ? formatDate(data.updatedAt) : "time here"}
             </p>
             <p className="text-lg font-bold pr-20 truncate">
