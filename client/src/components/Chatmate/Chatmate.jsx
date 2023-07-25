@@ -43,7 +43,7 @@ function Chatmate({ data, currentUserId }) {
             selected
               ? "bg-white ml-2 rounded-l-lg dark:bg-tahiti-300"
               : "bg-tahiti-100 rounded-none dark:bg-tahiti-200"
-          } p-2 rounded-l-lg text-black dark:text-white border-b-2 dark:border-b-gray-500 flex items-center`}
+          } rounded-l-lg text-black dark:text-white border-b-2 dark:border-b-gray-500 flex items-center`}
           onClick={() => getConversation(userData)}
         >
           <div className="flex-none p-3">
