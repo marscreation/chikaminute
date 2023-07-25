@@ -57,13 +57,13 @@ function EditProfile() {
             {userData ? (
               <>
                 <section className="h-auto mt-3 lg:mt-5">
-                  <div className="float-right lg:mr-20 lg:mb-5">
+                  {/* <div className="float-right lg:mr-20 lg:mb-5">
                     <Link to="/editprofile">
                       <button>
                         <BiEdit className="w-8 h-8 lg:w-8 lg:h-8" />
                       </button>
                     </Link>
-                  </div>
+                  </div> */}
                   <div className="mb-3 p-5 pb-0 lg:h-60 lg:w-60 mx-auto">
                     <img
                       src={person}
@@ -97,18 +97,16 @@ function EditProfile() {
                   </div>
                 </section>
                 <hr />
-                <div>
+                {/* <div>
                   <div className="lg:mr-20 flex float-right">
                     <PiKeyBold className="mr-2 mt-1" />
                     <Link to="/changepassword">
-                      {/* <EditProfileButton buttonName="Change Password" /> */}
-
                       <button className="underline text-xs font-bold">
                         CHANGE PASSWORD
                       </button>
                     </Link>
                   </div>
-                </div>
+                </div> */}
               </>
             ) : (
               <></>

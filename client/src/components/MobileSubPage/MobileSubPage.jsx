@@ -4,11 +4,12 @@
  **/
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 function MobileSubPage(props) {
   return (
-    <div className="absolute top-0 left-0 font-poppins inset-0 h-screen flex-col flex justify-center">
-      <div className="h-16 lg:h-20 w-full bg-tahiti-100">
+    <div className="absolute top-0 left-0 font-poppins inset-0 h-screen flex-col flex justify-center dark:text-white dark:bg-tahiti-300">
+      <div className="h-16 lg:h-20 w-full dark:bg-tahiti-200 dark:text-white bg-tahiti-100">
         <div className="header relative">
           {/* <button className="back px-4 h-full absolute left-0">BACK</button> */}
           <Link to="/home">
