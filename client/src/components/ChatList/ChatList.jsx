@@ -20,7 +20,8 @@ function ChatList() {
 
   return (
     <div className="w-full">
-      <div className="font-bold p-2 text-slate-500 dark:text-slate-300">
+      <label className="font-bold p-2 text-slate-500 dark:text-white">
+
         Conversation
       </div>
       {chats.map((chat) => (

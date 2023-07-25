@@ -9,8 +9,8 @@ function Home() {
     <>
       <Navbar />
       <ChatProvider>
-        <div className="chat sm:grid relative">
-          <section className="sidebar dark:bg-slate-700">
+        <div className="chat sm:grid relative font-poppins">
+          <section className="sidebar">
             <ChatList />
           </section>
           <section className="chatbox flex flex-col">
