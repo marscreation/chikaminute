@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react";
 import { userChats } from "../../api/ChatRequest";
-import Chatmate from "../Chatmate/Chatmate";
+// import Chatmate from "../Chatmate/Chatmate";
+import { useChatContext } from "../../context/ChatContext";
+import Chatmate from "../ChatMate/ChatMate";
 
 function ChatList() {
-  const [chats, setChats] = useState([]);
-  const userId = sessionStorage.getItem("userId");
-
-  useEffect(() => {
-    const getChats = async () => {
-      try {
-        const data = await userChats(userId);
-        setChats(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getChats();
-  }, []);
+  const {chats, user} = useChatContext()
 
   return (
     <div className="w-full">
@@ -24,7 +13,7 @@ function ChatList() {
         Conversation
       </div>
       {chats.map((chat) => (
-        <Chatmate key={chat._id} data={chat} currentUserId={userId} />
+        <Chatmate key={chat._id} data={chat} currentUserId={user.id} />
       ))}
     </div>
   );

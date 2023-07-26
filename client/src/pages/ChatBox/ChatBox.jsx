@@ -1,35 +1,84 @@
 import { useEffect, useRef, useState } from "react";
 import female from "../../assets/female2.png";
-import ReceivedChat from "./ReceivedChat";
-import SentChat from "./SentChat";
-import "./ChatBox.css"
 import { useChatContext } from "../../context/ChatContext";
-import { User } from "../../store/userDetails";
-import { sendMessage } from "../../api/MessageRequest";
+import { getMessage, sendMessage } from "../../api/MessageRequest";
+import "./ChatBox.css"
 
 function ChatBox() {
-  const { conversation, chatId, chatmateInfo } = useChatContext()
-  const [messages, setMessages] = useState([])
+  const { chatId, chatmateInfo, user, chats, setSentMessage, receivedMessage } = useChatContext()
   const [chatSelected, setChatSelected] = useState(false)
+
+  const [isOnline, setIsOnline] = useState(false)
+  const [messages, setMessages] = useState([])
+  const [chatBodyId, setChatBodyId] = useState((new Date()).getTime())
   const messageRef = useRef("")
+  const containerRef = useRef(null);
+  const scroll = useRef(null)
 
   const handleSendButton = async () => {
     if (messageRef.current.value == "") return;
     const textMessage = messageRef.current.value;
-    const info = await sendMessage({ chatId, message: textMessage })
-    setMessages(message => [...message, { createdAt: Date.now(), senderId: User.id, text: textMessage, _id: info._id }])
-    messageRef.current.value = ""
+
+    try {
+      const data = await sendMessage({ chatId, message: textMessage, senderId: user.id })
+      setMessages([...messages, data])
+      messageRef.current.value = ""
+
+      // socket
+      const msg = {
+        senderId: user.id,
+        text: textMessage,
+        chatId
+      }
+      const receiverId = chats.find(chat => chatId === chat?._id).members.find((id) => id !== user.id)
+      setSentMessage({ ...msg, receiverId })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleKeyEnter = async (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleSendButton()
+    }
   }
 
   useEffect(() => {
-    if (conversation?.length > 0) {
-      setMessages(conversation)
-      setChatSelected(true)
-    } else {
-      setMessages([])
-      setChatSelected(false)
+    if (receivedMessage !== null && receivedMessage.chatId === chatId) {
+      setMessages([...messages, receivedMessage]);
     }
-  }, [conversation])
+    setChatBodyId((new Date()).getTime())
+  }, [receivedMessage])
+
+  useEffect(() => {
+    const getConversation = async () => {
+      try {
+        if (chatId == "") return []
+        const message = await getMessage(chatId)
+        if (message?.length > 0) {
+          setChatSelected(true)
+        } else {
+          setChatSelected(false)
+        }
+        setMessages(message)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getConversation()
+  }, [chatId])
+
+  useEffect(() => {
+    setIsOnline(chatmateInfo?.online)
+  }, [chatmateInfo])
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const scrollBottom = container.scrollHeight - container.clientHeight;
+    container.scrollTop = scrollBottom;
+    // scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages])
 
   return (
     <>
@@ -46,24 +95,27 @@ function ChatBox() {
         </div>
         <div className='relative flex-1'>
           <h1 className="font-bold text-left text-2xl">{chatmateInfo?.firstname} {chatmateInfo?.lastname}</h1>
-          <p className="text-xs text-left">Active now</p>
+          {isOnline && (<p className="text-xs text-left">Active now</p>)}
         </div>
       </div>) : (<div className="text-2xl text-center font-bold text-slate-500 font-poppins">No converation yet</div>)}
-      <div className="chatbox-body pr-3 overflow-y-auto flex-1">
-        {chatSelected && messages?.length > 0 && messages.map(message => {
-          console.log(User.id)
-          if (message.senderId == User.id) {
-            return (<SentChat key={message._id} data={message} />)
-          }
-          return (<ReceivedChat key={message._id} data={message} />)
-        })}
+      <div ref={containerRef} key={chatBodyId} className="chatbox-body pr-3 overflow-y-auto flex-1">
+
+        {messages?.map(message => (
+          <>
+            <div key={message._id} ref={scroll} className={message.senderId == user.id ? "sender" : "receiver"}>
+              <div className="mt-3">
+                <p className="bg-tahiti-100 p-2 w-auto rounded-xl">{message.text}</p>
+              </div>
+            </div>
+          </>
+        ))}
       </div>
       <div className="flex py-3 px-1">
         <label
           htmlFor="image-upload"
           className="p-3 cursor-pointer rounded-md bg-tahiti-150"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z" /></svg>
         </label>
         <input
           type="file"
@@ -76,6 +128,7 @@ function ChatBox() {
           rows="2" // Set the number of visible rows to 2 (can be adjusted as needed)
           className="bg-tahiti-100 px-3 text-black resize-none flex-1"
           placeholder="Type your reply..."
+          onKeyDown={handleKeyEnter}
         />
 
         <button className="p-4 cursor-pointer" onClick={handleSendButton}>

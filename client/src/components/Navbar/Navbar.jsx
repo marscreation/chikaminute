@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User } from "../../store/userDetails";
 import { useAuthContext } from "../../context/AuthContext";
 import person2 from "../../assets/person2.png";
 import logo from "../../assets/logo.svg";
+import { useChatContext } from "../../context/ChatContext";
 
 function Navbar() {
+  const {user} = useChatContext()
   const [theme, setTheme] = useState(null);
   const [userDropMenu, setUserDropMenu] = useState("hidden");
   const [settingsDropDownMenu, setSettingsDropDownMenu] = useState("hidden");
@@ -113,10 +114,10 @@ function Navbar() {
             <div className="px-4 py-3">
               <Link to="/profile">
                 <span className="block text-sm text-gray-900 dark:text-white">
-                  {User?.firstname} {User?.lastname}
+                  {user?.firstname} {user?.lastname}
                 </span>
                 <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                  {User?.email}
+                  {user?.email}
                 </span>
               </Link>
             </div>

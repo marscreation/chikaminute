@@ -7,8 +7,8 @@ import { ChatProvider } from "../../context/ChatContext";
 function Home() {
   return (
     <>
-      <Navbar />
       <ChatProvider>
+        <Navbar />
         <div className="chat sm:grid relative">
           <section className="sidebar dark:bg-slate-700">
             <ChatList />
