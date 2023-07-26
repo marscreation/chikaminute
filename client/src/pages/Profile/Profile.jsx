@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import classes from "./Profile.module.css";
-import person from "../../assets/person.png";
-import EditProfileButton from "../EditProfile/ProfileComponents/EditProfileButton";
-import { BiEdit } from "react-icons/bi";
-import { PiKeyBold } from "react-icons/pi";
-import { IoIosArrowBack } from "react-icons/io";
 import MobileSubPage from "../../components/MobileSubPage/MobileSubPage";
 import blankAvatar from "../../assets/blankAvatar.png";
+// import classes from "./Profile.module.css";
+// import person from "../../assets/person.png";
+// import EditProfileButton from "../EditProfile/ProfileComponents/EditProfileButton";
+// import { BiEdit } from "react-icons/bi";
+// import { PiKeyBold } from "react-icons/pi";
+// import { IoIosArrowBack } from "react-icons/io";
 
 function EditProfile() {
   const [userData, setUserData] = useState(null);
@@ -28,7 +28,7 @@ function EditProfile() {
         const data = await response.json();
         setUserData(data);
 
-        console.log(data);
+        // console.log(data);
       }
     } catch (error) {
       console.log("Error fetching data");
@@ -67,7 +67,7 @@ function EditProfile() {
                   </div> */}
                   <div className="mb-3 p-5 pb-0 lg:h-60 lg:w-60 mx-auto">
                     <img
-                      src={userData.profilePicture || blankAvatar}
+                      src={userData?.profilePicture || blankAvatar}
                       alt="userAvatar"
                       className="rounded-full"
                     />

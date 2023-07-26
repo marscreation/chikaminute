@@ -1,29 +1,35 @@
-import UserModel from '../models/userModel.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import UserModel from "../models/userModel.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const loginUser = async (req, res) => {
   const { username, password } = req.body;
 
   try {
     const user = await UserModel.findOne({ username: username }).select(
-      'firstname lastname email password'
+      "firstname lastname email password"
     );
 
     if (user) {
       const validity = await bcrypt.compare(password, user.password);
       if (!validity) {
-        res.status(400).json({ message: 'Invalid password' });
+        res.status(400).json({ message: "Invalid password" });
       } else {
         const { _id, firstname, lastname, email } = user._doc;
-        const token = jwt.sign({ id: _id, firstname, lastname, email }, process.env.JWT_KEY, {
-          expiresIn: process.env.JWT_EXPIRES_IN,
-        });
+        const token = jwt.sign(
+          { id: _id, firstname, lastname, email },
+          process.env.JWT_KEY,
+          {
+            expiresIn: process.env.JWT_EXPIRES_IN,
+          }
+        );
 
-        res.status(200).json({ user: { id: _id, firstname, lastname, email }, token });
+        res
+          .status(200)
+          .json({ user: { id: _id, firstname, lastname, email }, token });
       }
     } else {
-      res.status(404).json('User not found');
+      res.status(404).json("User not found");
     }
   } catch (err) {
     res.status(500).json(err);
@@ -40,12 +46,12 @@ export const registerUser = async (req, res) => {
     const oldUser = await UserModel.findOne({ username });
 
     if (oldUser)
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: "User already exists" });
 
     const emailExist = await UserModel.findOne({ email });
 
     if (emailExist) {
-      return res.status(400).json({ message: 'Email already exists' });
+      return res.status(400).json({ message: "Email already exists" });
     }
 
     const user = await newUser.save();

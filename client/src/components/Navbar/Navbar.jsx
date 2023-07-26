@@ -133,47 +133,6 @@ function Navbar() {
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
               <li>
-                <button
-                  className="block px-4 py-2 text-sm text-gray-700
-                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
-                  dark:hover:text-white"
-                  id="settings-menu-button"
-                  aria-expanded="false"
-                  data-dropdown-toggle="settings-dropdown"
-                  data-dropdown-placement="bottom"
-                  onClick={handleSettingsDropDown}
-                >
-                  Settings
-                </button>
-              </li>
-              <li>
-                {/* settings drop down menu */}
-                <div
-                  className={settingsDropDownMenu}
-                  id="settings-dropdown"
-                  style={{ inset: "62px 0px auto auto" }}
-                >
-                  {/* list of settings -> Edit Profile, Change password */}
-                  <ul className="py-2" aria-labelledby="user-menu-button">
-                    {/* Edit Profile Link */}
-                    <Link
-                      to="/editprofile"
-                      className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      <li>Edit Profile</li>
-                    </Link>
-                    {/* Change Password Link */}
-                    <Link
-                      to="/changepassword"
-                      className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      <li>Change Password</li>
-                    </Link>
-                  </ul>
-                  {/*  */}
-                </div>
-              </li>
-              <li>
                 <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                   <button
                     data-tooltip-target="toggle-checked-example-toggle-dark-mode-tooltip"
@@ -204,6 +163,47 @@ function Navbar() {
                     </svg>
                     <span className="sr-only">Toggle dark/light mode</span>
                   </button>
+                </div>
+              </li>
+              <li>
+                <button
+                  className="block px-4 py-2 text-sm text-gray-700
+                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                  dark:hover:text-white"
+                  id="settings-menu-button"
+                  aria-expanded="false"
+                  data-dropdown-toggle="settings-dropdown"
+                  data-dropdown-placement="bottom"
+                  onClick={handleSettingsDropDown}
+                >
+                  Settings
+                </button>
+              </li>
+              <li>
+                {/* settings drop down menu */}
+                <div
+                  className={settingsDropDownMenu}
+                  id="settings-dropdown"
+                  style={{ inset: "62px 0px auto auto" }}
+                >
+                  {/* list of settings -> Edit Profile, Change password */}
+                  <ul className="py-2" aria-labelledby="settings-menu-button">
+                    {/* Edit Profile Link */}
+                    <Link
+                      to="/editprofile"
+                      className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <li>Edit Profile</li>
+                    </Link>
+                    {/* Change Password Link */}
+                    <Link
+                      to="/changepassword"
+                      className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <li>Change Password</li>
+                    </Link>
+                  </ul>
+                  {/*  */}
                 </div>
               </li>
               <li>
