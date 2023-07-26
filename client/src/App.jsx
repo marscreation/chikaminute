@@ -11,6 +11,7 @@ import ChangePassword from "./pages/EditProfile/ChangePassword";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   function PrivateRoute({ element: Element }) {
@@ -26,30 +27,32 @@ function App() {
 
   return (
     <>
-      <Router>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<PrivateRoute element={Home} />} />
-            <Route
-              path="/register"
-              element={<PrivateRoute element={Register} />}
-            />
-            <Route
-              path="/profile"
-              element={<PrivateRoute element={Profile} />}
-            />
-            <Route
-              path="/editprofile"
-              element={<PrivateRoute element={EditProfile} />}
-            />
-            <Route
-              path="/changepassword"
-              element={<PrivateRoute element={ChangePassword} />}
-            />
-          </Routes>
-        </AuthProvider>
-      </Router>
+      <ThemeProvider>
+        <Router>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/home" element={<PrivateRoute element={Home} />} />
+              <Route
+                path="/register"
+                element={<PrivateRoute element={Register} />}
+              />
+              <Route
+                path="/profile"
+                element={<PrivateRoute element={Profile} />}
+              />
+              <Route
+                path="/editprofile"
+                element={<PrivateRoute element={EditProfile} />}
+              />
+              <Route
+                path="/changepassword"
+                element={<PrivateRoute element={ChangePassword} />}
+              />
+            </Routes>
+          </AuthProvider>
+        </Router>
+      </ThemeProvider>
     </>
   );
 }

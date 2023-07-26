@@ -5,13 +5,14 @@ import { useAuthContext } from "../../context/AuthContext";
 import person2 from "../../assets/person2.png";
 import logo from "../../assets/logo.svg";
 import { IoIosArrowBack } from "react-icons/io";
+import { useTheme } from "../../context/ThemeContext";
 
 function Navbar() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const [userDropMenu, setUserDropMenu] = useState("hidden");
   const [settingsDropDownMenu, setSettingsDropDownMenu] = useState("hidden");
-
   const { isLoggedIn, setIsLoggedIn } = useAuthContext();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   //remove token and userId upon logout and redirect to Login page
@@ -25,9 +26,10 @@ function Navbar() {
   }
 
   const handleThemeSwitch = () => {
-    const updatedTheme = theme === "dark" ? "light" : "dark";
-    setTheme(updatedTheme);
-    localStorage.setItem("theme", updatedTheme);
+    // const updatedTheme = theme === "dark" ? "light" : "dark";
+    // setTheme(updatedTheme);
+    // localStorage.setItem("theme", updatedTheme);
+    toggleTheme();
   };
 
   const handleUserDropDown = () => {
@@ -46,13 +48,13 @@ function Navbar() {
     }
   };
 
-  useEffect(() => {
-    if (window.matchMedia("{prefers-color-scheme: dark}").matches) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.matchMedia("{prefers-color-scheme: dark}").matches) {
+  //     setTheme("light");
+  //   } else {
+  //     setTheme("dark");
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (theme === "dark") {
