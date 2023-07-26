@@ -7,6 +7,7 @@ import { BiEdit } from "react-icons/bi";
 import { PiKeyBold } from "react-icons/pi";
 import { IoIosArrowBack } from "react-icons/io";
 import MobileSubPage from "../../components/MobileSubPage/MobileSubPage";
+import blankAvatar from "../../assets/blankAvatar.png";
 
 function EditProfile() {
   const [userData, setUserData] = useState(null);
@@ -66,14 +67,16 @@ function EditProfile() {
                   </div> */}
                   <div className="mb-3 p-5 pb-0 lg:h-60 lg:w-60 mx-auto">
                     <img
-                      src={person}
+                      src={userData.profilePicture || blankAvatar}
                       alt="userAvatar"
                       className="rounded-full"
                     />
                   </div>
                   <div className="text-center mb-2 lg:text-xl">
                     {/* <EditProfileButton buttonName="Edit Avatar" /> */}
-                    <button>Edit Avatar</button>
+                    <Link to="/changeavatar">
+                      <button>Edit Avatar</button>
+                    </Link>
                   </div>
                 </section>
                 <hr />

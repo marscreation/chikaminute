@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import classes from "./Register.module.css";
 import logo from "../../assets/logo.svg";
-import { Link } from "react-router-dom";
-import Login from "../Login/Login";
+import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
   const [form, setForm] = useState({
@@ -18,6 +17,8 @@ function Register() {
     form;
 
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
 
   //handle input change
   const handleInputChange = (event) => {
@@ -103,7 +104,7 @@ function Register() {
       });
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       if (response.ok) {
         //clear form upon successful registration
@@ -118,6 +119,7 @@ function Register() {
 
         //temporary alert upon successful registration
         alert("Registration Successful");
+        navigate("/");
       } else {
         //validate username if username already exist
         if (data.message === "User already exists") {

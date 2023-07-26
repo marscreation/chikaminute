@@ -23,7 +23,7 @@ function MobileSubPage(props) {
           {props.rightBtn && (
             // need to update this
             // add prompt to discard changes or something...
-            <Link to="/home">
+            <Link to="/profile">
               <button
                 className="back lg:px-4 mr-3 mt-2 h-full absolute right-0 top-0 text-xl"
                 onClick={props.rightBtnClick}

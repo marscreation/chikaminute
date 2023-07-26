@@ -11,6 +11,7 @@ import ChangePassword from "./pages/EditProfile/ChangePassword";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
+import ChangeAvatar from "./pages/EditProfile/ChangeAvatar";
 
 function App() {
   function PrivateRoute({ element: Element }) {
@@ -46,6 +47,10 @@ function App() {
             <Route
               path="/changepassword"
               element={<PrivateRoute element={ChangePassword} />}
+            />
+            <Route
+              path="/changeavatar"
+              element={<PrivateRoute element={ChangeAvatar} />}
             />
           </Routes>
         </AuthProvider>

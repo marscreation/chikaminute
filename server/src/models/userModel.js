@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const UserSchema = mongoose.Schema(
   {
@@ -24,12 +24,15 @@ const UserSchema = mongoose.Schema(
     },
     theme: {
       type: String,
-      default: 'dark',
+      default: "dark",
     },
-    profilePicture: String,
+    profilePicture: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
 export default UserModel;
