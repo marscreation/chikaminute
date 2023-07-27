@@ -24,7 +24,7 @@ export default {
       margin: {
         97: "24.2rem",
         100: "37rem",
-        150: "50rem",
+        150: "48rem",
       },
     },
   },
