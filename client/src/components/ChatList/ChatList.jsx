@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { userChats } from "../../api/ChatRequest";
-// import Chatmate from "../Chatmate/Chatmate";
 import { useChatContext } from "../../context/ChatContext";
 import Chatmate from "../ChatMate/ChatMate";
 

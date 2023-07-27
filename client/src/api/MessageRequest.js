@@ -10,9 +10,9 @@ export const getMessage = async (id) => {
         console.log(error);
     }
 };
-export const sendMessage = async ({ chatId, message, senderId }) => {
+export const sendMessage = async ({ chatId, message, senderId, receiverId }) => {
     try {
-        const data = { chatId, senderId, text: message };
+        const data = { chatId, senderId, text: message, receiverId };
         const response = await fetch(`${API_URL}/message`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

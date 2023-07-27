@@ -18,18 +18,18 @@ function ChatBox() {
     const textMessage = messageRef.current.value;
 
     try {
-      const data = await sendMessage({ chatId, message: textMessage, senderId: user.id })
+      const receiverId = await chats.find(chat => chatId === chat?._id).members.find((id) => id !== user.id)
+      const msg = {
+        senderId: user.id,
+        message: textMessage,
+        receiverId,
+        chatId
+      }
+      
+      const data = await sendMessage(msg)
       setMessages([...messages, data])
       messageRef.current.value = ""
 
-      // socket
-      const msg = {
-        senderId: user.id,
-        text: textMessage,
-        chatId
-      }
-      const receiverId = chats.find(chat => chatId === chat?._id).members.find((id) => id !== user.id)
-      setSentMessage({ ...msg, receiverId })
     } catch (error) {
       console.log(error)
     }

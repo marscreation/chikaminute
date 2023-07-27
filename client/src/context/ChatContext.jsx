@@ -18,6 +18,10 @@ export function ChatProvider({ children }) {
   const [user, setUser] = useState({})
   const socket = useRef()
 
+  // function updateChats() {
+  //   console.log("message" ,  chats)
+  // }
+
   useEffect(() => {
     socket.current = io.connect("http://127.0.0.1:3001")
     function userData() {
@@ -34,6 +38,16 @@ export function ChatProvider({ children }) {
     userData()
     socket.current.on("receive_message", data => {
       setReceivedMessage(data)
+    })
+    socket.current.on("update_chat", data => {
+      const updateChat = [...chats]
+      const index = chats.map(object => object._id).indexOf(data._id)
+      console.log("chatData",data, index)
+      if (index >= 0) {
+        updateChat[index] = data;console.log('updateChat',updateChat)
+        // setChats(updateChat)
+      }
+      // updateChats()
     })
   }, [])
 
@@ -61,6 +75,7 @@ export function ChatProvider({ children }) {
   useEffect(() => {
     if (sentMessage !== null)
       socket.current.emit("send_message", sentMessage);
+      // updateChats(sentMessage)
   }, [sentMessage])
 
   const values = {
