@@ -10,9 +10,7 @@ function ChatBox() {
 
   const [isOnline, setIsOnline] = useState(false)
   const [messages, setMessages] = useState([])
-  const [chatBodyId, setChatBodyId] = useState((new Date()).getTime())
   const messageRef = useRef("")
-  const containerRef = useRef(null);
   const scroll = useRef(null)
 
   const handleSendButton = async () => {
@@ -48,7 +46,6 @@ function ChatBox() {
     if (receivedMessage !== null && receivedMessage.chatId === chatId) {
       setMessages([...messages, receivedMessage]);
     }
-    setChatBodyId((new Date()).getTime())
   }, [receivedMessage])
 
   useEffect(() => {
@@ -74,10 +71,7 @@ function ChatBox() {
   }, [chatmateInfo])
 
   useEffect(() => {
-    const container = containerRef.current;
-    const scrollBottom = container.scrollHeight - container.clientHeight;
-    container.scrollTop = scrollBottom;
-    // scroll.current?.scrollIntoView({ behavior: "smooth" });
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages])
 
   return (
@@ -98,17 +92,17 @@ function ChatBox() {
           {isOnline && (<p className="text-xs text-left">Active now</p>)}
         </div>
       </div>) : (<div className="text-2xl text-center font-bold text-slate-500 font-poppins">No converation yet</div>)}
-      <div ref={containerRef} key={chatBodyId} className="chatbox-body pr-3 overflow-y-auto flex-1">
-
-        {messages?.map(message => (
+      <div className="chatbox-body pr-3 overflow-y-auto flex-1">
+        {messages && messages.map(message => (
           <>
-            <div key={message._id} ref={scroll} className={message.senderId == user.id ? "sender" : "receiver"}>
+            <div key={message._id} className={message.senderId == user.id ? "sender" : "receiver"}>
               <div className="mt-3">
                 <p className="bg-tahiti-100 p-2 w-auto rounded-xl">{message.text}</p>
               </div>
             </div>
           </>
         ))}
+        <div ref={scroll}></div>
       </div>
       <div className="flex py-3 px-1">
         <label
