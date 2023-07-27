@@ -1,20 +1,27 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
+import classes from "../Login/Login.module.css";
 import logo from "../../assets/logo.svg";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginForm, setLoginForm] = useState({
+    username: "",
+    password: "",
+  });
+
+  const { username, password } = loginForm;
+
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const { isLoggedIn, setIsLoggedIn } = useAuthContext();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "username") setUsername(value);
-    if (name === "password") setPassword(value);
+  const handleInputChange = (event) => {
+    setLoginForm((previous) => ({
+      ...previous,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const validateForm = () => {
@@ -29,7 +36,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const errors = {};
+      setErrors({});
 
       const response = await fetch(
         `${import.meta.env.VITE_REACT_API_URL}/auth/login`,
@@ -42,21 +49,35 @@ function Login() {
       const result = await response.json();
 
       if (response.status == 400) {
-        alert(result.message);
-        return;
+        setErrors((previous) => ({
+          ...previous,
+          password: "Password is incorrect",
+        }));
       }
+
+      if (response.status === 404) {
+        setErrors((previous) => ({
+          ...previous,
+          username: "Username does not exist",
+        }));
+      }
+
       if (result.token) {
         sessionStorage.setItem("token", result.token);
         sessionStorage.setItem("userId", result.user.id);
         console.log(result);
         setIsLoggedIn(true);
         navigate("/home");
-        alert("welcome");
+        alert("Welcome");
       }
-      if (result.error) {
-        errors.login = result.error;
-        setErrors(errors);
-      }
+      // if (result.message === "Invalid Password") {
+      //   errors.login = result.message;
+      //   setErrors(errors.login);
+      // }
+      // if (result.message === "User does not exist") {
+      //   errors.login = result.message;
+      //   setErrors(errors.login);
+      // }
     }
   };
 
@@ -91,13 +112,16 @@ function Login() {
                   id="username"
                   name="username"
                   type="text"
-                  value={username}
+                  value={loginForm.username}
                   onChange={handleInputChange}
                   placeholder="Username"
                   className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 sm:text-sm sm:leading-6"
                   required
                 />
               </div>
+              {errors.username && (
+                <label className={classes.errorlabel}>{errors.username}</label>
+              )}
             </div>
 
             <div>
@@ -106,13 +130,16 @@ function Login() {
                   id="password"
                   name="password"
                   type="password"
-                  value={password}
+                  value={loginForm.password}
                   onChange={handleInputChange}
                   placeholder="Password"
                   className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 sm:text-sm sm:leading-6"
                   required
                 />
               </div>
+              {errors.password && (
+                <label className={classes.errorlabel}>{errors.password}</label>
+              )}
             </div>
 
             <div>

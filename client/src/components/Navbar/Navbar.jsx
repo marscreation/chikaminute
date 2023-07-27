@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User } from "../../store/userDetails";
+// import { User } from "../../store/userDetails";
 import { useAuthContext } from "../../context/AuthContext";
-import person2 from "../../assets/person2.png";
+import { useUserContext } from "../../context/UserData";
+import { useTheme } from "../../context/ThemeContext";
+import blankAvatar from "../../assets/blankAvatar.png";
 import logo from "../../assets/logo.svg";
-import { IoIosArrowBack } from "react-icons/io";
+import { CgLogOut } from "react-icons/cg";
+import { BiEdit } from "react-icons/bi";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { RiUserSettingsFill, RiMoonFill, RiSunFill } from "react-icons/ri";
 
 function Navbar() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const [userDropMenu, setUserDropMenu] = useState("hidden");
   const [settingsDropDownMenu, setSettingsDropDownMenu] = useState("hidden");
+
+  const { theme, toggleTheme } = useTheme();
+  const userData = useUserContext();
 
   const { isLoggedIn, setIsLoggedIn } = useAuthContext();
   const navigate = useNavigate();
@@ -25,9 +33,10 @@ function Navbar() {
   }
 
   const handleThemeSwitch = () => {
-    const updatedTheme = theme === "dark" ? "light" : "dark";
-    setTheme(updatedTheme);
-    localStorage.setItem("theme", updatedTheme);
+    // const updatedTheme = theme === "dark" ? "light" : "dark";
+    // setTheme(updatedTheme);
+    // localStorage.setItem("theme", updatedTheme);
+    toggleTheme();
   };
 
   const handleUserDropDown = () => {
@@ -46,13 +55,13 @@ function Navbar() {
     }
   };
 
-  useEffect(() => {
-    if (window.matchMedia("{prefers-color-scheme: dark}").matches) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.matchMedia("{prefers-color-scheme: dark}").matches) {
+  //     setTheme("light");
+  //   } else {
+  //     setTheme("dark");
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -76,7 +85,7 @@ function Navbar() {
 
   return (
     <nav className=" border-gray-200 dark:bg-tahiti-300 border-b-slate-100 dark:border-b-gray-500 border-b-2 font-poppins">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 pr-2">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3 pr-2">
         <a href="#" className="flex items-center">
           <img src={logo} className="h-10 mr-3 " alt="Chika Minute Logo" />
 
@@ -97,7 +106,7 @@ function Navbar() {
             <span className="sr-only">Open user menu</span>
             <img
               className="w-8 lg:w-10 h-8 lg:h-10 rounded-full"
-              src={person2}
+              src={userData?.profilePicture || blankAvatar}
               alt="user photo"
             />
           </button>
@@ -115,17 +124,17 @@ function Navbar() {
                 <div className="flex">
                   <div>
                     <img
-                      className="w-8 lg:w-10 h-8 lg:h-10 mr-1 rounded-full"
-                      src={person2}
+                      className="w-8 lg:w-10 h-8 lg:h-10 mr-2 rounded-full"
+                      src={userData?.profilePicture || blankAvatar}
                       alt="user photo"
                     />
                   </div>
                   <div>
                     <span className="block text-sm text-gray-900 dark:text-white">
-                      {User?.firstname} {User?.lastname}
+                      {userData?.firstname} {userData?.lastname}
                     </span>
                     <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                      {User?.email}
+                      {userData?.email}
                     </span>
                   </div>
                 </div>
@@ -133,13 +142,15 @@ function Navbar() {
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
               <li>
-                <div className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                <div
+                  onClick={handleThemeSwitch}
+                  className="flex px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
                   <button
                     data-tooltip-target="toggle-checked-example-toggle-dark-mode-tooltip"
-                    onClick={handleThemeSwitch}
                     type="button"
                     data-toggle-dark="dark"
-                    className="flex items-center w-9 h-9 justify-center text-xs font-medium text-gray-700 bg-white border border-gray-200 rounded-lg toggle-dark-state-example hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    className="flex mr-2 items-center w-9 h-9 justify-center text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg toggle-dark-state-example hover:bg-gray-100 hover:text-tahiti-150 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                   >
                     <svg
                       data-toggle-icon="moon"
@@ -163,21 +174,33 @@ function Navbar() {
                     </svg>
                     <span className="sr-only">Toggle dark/light mode</span>
                   </button>
+                  {theme === "dark" ? (
+                    <>
+                      <label className="my-auto">Light Mode</label>
+                    </>
+                  ) : (
+                    <>
+                      <label className="my-auto">Dark Mode</label>
+                    </>
+                  )}
                 </div>
               </li>
               <li>
-                <button
-                  className="block px-4 py-2 text-sm text-gray-700
-                  hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
-                  dark:hover:text-white"
-                  id="settings-menu-button"
-                  aria-expanded="false"
-                  data-dropdown-toggle="settings-dropdown"
-                  data-dropdown-placement="bottom"
-                  onClick={handleSettingsDropDown}
-                >
-                  Settings
-                </button>
+                <div className="flex mx-1 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                  <button
+                    className="px-4 py-2 text-sm text-gray-700
+                    hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                    dark:hover:text-white flex"
+                    id="settings-menu-button"
+                    aria-expanded="false"
+                    data-dropdown-toggle="settings-dropdown"
+                    data-dropdown-placement="bottom"
+                    onClick={handleSettingsDropDown}
+                  >
+                    <RiUserSettingsFill className=" h-9 w-9 mr-2 p-1 rounded-lg border hover:bg-gray-100 hover:text-tahiti-150 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" />
+                    <label className="my-auto">Settings</label>
+                  </button>
+                </div>
               </li>
               <li>
                 {/* settings drop down menu */}
@@ -187,34 +210,37 @@ function Navbar() {
                   style={{ inset: "62px 0px auto auto" }}
                 >
                   {/* list of settings -> Edit Profile, Change password */}
-                  <ul className="py-2" aria-labelledby="settings-menu-button">
+                  <ul className="pl-5" aria-labelledby="settings-menu-button">
                     {/* Edit Profile Link */}
                     <Link
                       to="/editprofile"
-                      className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      className="flex px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      <li>Edit Profile</li>
+                      <BiEdit className=" h-9 w-9 mr-2 p-1 rounded-lg border hover:bg-gray-100 hover:text-tahiti-150 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" />
+                      <li className="my-auto">Edit Profile</li>
                     </Link>
                     {/* Change Password Link */}
                     <Link
                       to="/changepassword"
-                      className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      className="flex px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      <li>Change Password</li>
+                      <RiLockPasswordFill className=" h-9 w-9 mr-2 p-1 rounded-lg border hover:bg-gray-100 hover:text-tahiti-150 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" />
+                      <li className="my-auto">Change Password</li>
                     </Link>
                   </ul>
                   {/*  */}
                 </div>
               </li>
               <li>
-                <button
-                  onClick={handleLogout}
-                  to="/"
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Sign out
-                </button>
+                <div className="flex px-1 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                  <button
+                    onClick={handleLogout}
+                    className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    <CgLogOut className=" h-9 w-9 mr-2 p-1 rounded-lg border hover:bg-gray-100 hover:text-tahiti-150 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" />
+                    <label className="my-auto">Sign out</label>
+                  </button>
+                </div>
               </li>
             </ul>
           </div>

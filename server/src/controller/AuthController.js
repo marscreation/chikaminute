@@ -29,7 +29,7 @@ export const loginUser = async (req, res) => {
           .json({ user: { id: _id, firstname, lastname, email }, token });
       }
     } else {
-      res.status(404).json("User not found");
+      res.status(404).json({ message: "User does not exist" });
     }
   } catch (err) {
     res.status(500).json(err);
@@ -55,12 +55,12 @@ export const registerUser = async (req, res) => {
     }
 
     const user = await newUser.save();
-    const token = jwt.sign(
-      { username: user.username, id: user._id },
-      process.env.JWT_KEY,
-      { expiresIn: process.env.JWT_EXPIRES_IN }
-    );
-    res.status(200).json({ token });
+    // const token = jwt.sign(
+    //   { username: user.username, id: user._id },
+    //   process.env.JWT_KEY,
+    //   { expiresIn: process.env.JWT_EXPIRES_IN }
+    // );
+    res.status(200).json({ data: user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
