@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "./EditProfile.module.css";
 import EditProfileButton from "./ProfileComponents/EditProfileButton";
 import { IoIosArrowBack } from "react-icons/io";
@@ -75,6 +75,39 @@ function EditProfile() {
       console.log("Failed to update", error);
     }
   };
+
+  useEffect(() => {
+    // Fetch user data from the API using the token and userId
+    async function fetchUserData() {
+      try {
+        const response = await fetch(`${hostURL}/user/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const userData = await response.json();
+        if (response.ok) {
+          // Set the form state with the user data
+          setForm({
+            firstname: userData.firstname,
+            lastname: userData.lastname,
+            username: userData.username,
+            email: userData.email,
+          });
+        } else {
+          // Handle error case if necessary
+          console.log("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.log("Failed to fetch user data", error);
+      }
+    }
+
+    fetchUserData();
+  }, [userId, token]);
   return (
     <MobileSubPage
       header="Edit Profile"

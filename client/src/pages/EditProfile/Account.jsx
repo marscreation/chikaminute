@@ -17,8 +17,9 @@ function Account() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (deleteUser === "DELETE") {
-      try {
+
+    try {
+      if (deleteUser === "DELETE") {
         const response = await fetch(`${hostURL}/user/${userId}`, {
           method: "DELETE",
           headers: {
@@ -36,11 +37,11 @@ function Account() {
         sessionStorage.removeItem("userId");
         sessionStorage.removeItem("token");
         navigate("/");
-      } catch (error) {
-        console.log(error);
+      } else {
+        alert("Please type DELETE correctly");
       }
-    } else {
-      alert("Please type DELETE correctly");
+    } catch (error) {
+      console.log(error);
     }
   };
 
