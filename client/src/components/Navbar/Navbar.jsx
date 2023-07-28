@@ -8,8 +8,12 @@ import blankAvatar from "../../assets/blankAvatar.png";
 import logo from "../../assets/logo.svg";
 import { CgLogOut } from "react-icons/cg";
 import { BiEdit } from "react-icons/bi";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { RiUserSettingsFill, RiMoonFill, RiSunFill } from "react-icons/ri";
+import {
+  RiLockPasswordFill,
+  RiDeleteBin5Fill,
+  RiUserSettingsFill,
+} from "react-icons/ri";
+// import { , RiMoonFill, RiSunFill } from "react-icons/ri";
 
 function Navbar() {
   // const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
@@ -232,8 +236,8 @@ function Navbar() {
                       to="/account"
                       className="flex px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      <RiLockPasswordFill className=" h-9 w-9 mr-2 p-1 rounded-lg border hover:bg-gray-100 hover:text-tahiti-150 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" />
-                      <li className="my-auto">Account</li>
+                      <RiDeleteBin5Fill className=" h-9 w-9 mr-2 p-1 rounded-lg border hover:bg-gray-100 hover:text-tahiti-150 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" />
+                      <li className="my-auto">Delete Account</li>
                     </Link>
                   </ul>
                   {/*  */}
