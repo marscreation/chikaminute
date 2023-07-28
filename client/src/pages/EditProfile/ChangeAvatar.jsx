@@ -161,104 +161,117 @@ function ChangeAvatar() {
       rightBtn="Done"
       fontSize="text-2xl lg:text-3xl"
     >
-      <div className="min-h-screen font-poppins">
-        <div className="mb-3 p-5 pb-0 lg:h-60 lg:w-60 mx-auto">
-          <div>
-            <h2 className="text-xl font-semibold">Note:</h2>
-            <ul className="ml-8 mt-4">
-              <li className="list-disc mt-2">
-                Kindly select the image to update your avatar
-              </li>
-              <li className="list-disc mt-2">
-                Only files with the extensions .jpg, .png, .jpeg, and .svg. are
-                accepted
-              </li>
-            </ul>
-          </div>
-          <label htmlFor="avatar-menu-button">
-            <img
-              // render base64 file when the user updated the picture, it wont be saved unless submit button is clicked
-              // else render profilePicture from userData (database)
-              // else if there is no profile picture, render default photo (applies to everyone)
-              src={
-                userAvatar.myAvatar || userData?.profilePicture || blankAvatar
-              }
-              alt="userAvatar"
-              className="rounded-full"
-            />
-          </label>
-          <button
-            id="avatar-menu-button"
-            aria-expanded="false"
-            data-dropdown-toggle="avatar-dropdown"
-            data-dropdown-placement="bottom"
-            onClick={handleAvatarDropDown}
-          ></button>
-          {/* settings drop down menu */}
-          <div
-            className={avatarDropDownMenu}
-            id="avatar-dropdown"
-            style={{ inset: "62px 0px auto auto" }}
-          >
-            {/* list of avatar -> Delete Avatar, Upload Change */}
-            <ul className="py-2" aria-labelledby="avatar-menu-button">
-              {/* Upload Avatar */}
-              <label
-                htmlFor="avatarUpload"
-                className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              >
-                Upload Avatar
-              </label>
-
-              {/* Change Password Link */}
-              <button
-                htmlFor="avatarDelete"
-                className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                onClick={handleAvatarDelete}
-              >
-                Delete Avatar
-              </button>
-            </ul>
-            {/*  */}
-          </div>
-          <form
-            onSubmit={handleSubmit}
-            className="grid w-full mt-4 lg:mt-8 lg:pl-40"
-          >
-            {/* input is hidden, picture is clickable */}
-            <input
-              type="file"
-              label="userAvatar"
-              name="userAvatar"
-              id="avatarUpload"
-              accept=".jpg, .png .jpeg, .svg"
-              onChange={(event) => handleAvatarUpload(event)}
-            />
-            <div className="flex justify-center space-x-4 mt-4">
-              <button
-                type="submit"
-                //classname changes when there is a change in avatar upload, change color upon uploading a new profile picture
-                //by default (no changes) Save button is not be clickable
-                //will only be clickable if there are changes
-                //pa edit nung font colors nalilito ako sa colors thank you!
-                className={`${
-                  isChanged
-                    ? "bg-tahiti-150 px-3 p-3 text-md font-semibold leading-6 text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-                    : "bg-gray-300"
-                } text-white font-semibold px-4 py-2 rounded-md`}
-              >
-                Save
-              </button>
-              <button
-                type="button"
-                className="bg-gray-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md"
-                onClick={handleDiscardChanges}
-                disabled={!isChanged}
-              >
-                Discard Changes
-              </button>
+      <div className="grid min-h-screen font-poppins">
+        <div className="mb-3 p-2 pt-2 pb-0 mx-auto">
+          <div className="flex min-h-full flex-col px-6 lg:px-8">
+            <div>
+              <h2 className="text-xl font-semibold -mt-2 lg:mt-2">Note:</h2>
+              <ul className="ml-8 mt-2">
+                <li className="list-disc text-sm lg:text-lg">
+                  Kindly select the image to update your avatar
+                </li>
+                <li className="list-disc mt-2 text-sm lg:text-lg">
+                  Only files with the extensions .jpg, .png, .jpeg, and .svg.
+                  are accepted
+                </li>
+              </ul>
             </div>
-          </form>
+            <label htmlFor="avatar-menu-button">
+              <div className="mx-auto mt-2 lg:mt-4 lg:h-52 lg:w-52 rounded-full border-8 border-tahiti-100">
+                <img
+                  // render base64 file when the user updated the picture, it wont be saved unless submit button is clicked
+                  // else render profilePicture from userData (database)
+                  // else if there is no profile picture, render default photo (applies to everyone)
+                  src={
+                    userAvatar.myAvatar ||
+                    userData?.profilePicture ||
+                    blankAvatar
+                  }
+                  alt="userAvatar"
+                  className="rounded-full lg:h-48 lg:w-48 "
+                />
+              </div>
+            </label>
+            <button
+              id="avatar-menu-button"
+              aria-expanded="false"
+              data-dropdown-toggle="avatar-dropdown"
+              data-dropdown-placement="bottom"
+              onClick={handleAvatarDropDown}
+            ></button>
+            {/* settings drop down menu */}
+            <div
+              className={avatarDropDownMenu}
+              id="avatar-dropdown"
+              style={{ inset: "62px 0px auto auto" }}
+            >
+              {/* list of avatar -> Delete Avatar, Upload Change */}
+              <ul
+                className="lg:mt-4 py-2 bg-gray-200 transition-transform mt-1 dark:bg-tahiti-200"
+                aria-labelledby="avatar-menu-button"
+              >
+                {/* Upload Avatar */}
+                <div className="text-center ">
+                  <label
+                    htmlFor="avatarUpload"
+                    className="border-b border-white block px-6 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Upload Avatar
+                  </label>
+                </div>
+                {/* Change Password Link */}
+                <div>
+                  <button
+                    htmlFor="avatarDelete"
+                    className="block mx-auto py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    onClick={handleAvatarDelete}
+                  >
+                    Delete Avatar
+                  </button>
+                </div>
+              </ul>
+              {/*  */}
+            </div>
+            <form onSubmit={handleSubmit} className="w-fullmt-4 lg:mt-8">
+              {/* input is hidden, picture is clickable */}
+              <input
+                type="file"
+                label="userAvatar"
+                name="userAvatar"
+                id="avatarUpload"
+                accept=".jpg, .png .jpeg, .svg"
+                onChange={(event) => handleAvatarUpload(event)}
+              />
+              <div className="flex w-full -mt-5 h-16">
+                <div className="w-1/2  mr-3 h-full pt-3 text-center">
+                  <button
+                    type="submit"
+                    //classname changes when there is a change in avatar upload, change color upon uploading a new profile picture
+                    //by default (no changes) Save button is not be clickable
+                    //will only be clickable if there are changes
+                    //pa edit nung font colors nalilito ako sa colors thank you!
+                    className={`${
+                      isChanged
+                        ? "bg-tahiti-150 leading-6 text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                        : "bg-tahiti-150"
+                    } text-white rounded-md text-lg h-full lg:w-full`}
+                  >
+                    Save
+                  </button>
+                </div>
+                <div className="w-1/2 h-full  pt-3 text-center">
+                  <button
+                    type="button"
+                    className="lg:w-full h-full text-sm bg-tahiti-150 lg:text-lg hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 text-white font-semibold rounded-md"
+                    onClick={handleDiscardChanges}
+                    disabled={!isChanged}
+                  >
+                    Discard Changes
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </MobileSubPage>

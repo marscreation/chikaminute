@@ -65,17 +65,22 @@ function EditProfile() {
                       </button>
                     </Link>
                   </div> */}
-                  <div className="mb-3 p-5 pb-0 lg:h-60 lg:w-60 mx-auto">
+                  <div className="mx-auto mt-2 lg:h-52 lg:w-52 rounded-full border-8 border-tahiti-100">
                     <img
                       src={userData?.profilePicture || blankAvatar}
                       alt="userAvatar"
-                      className="rounded-full"
+                      className="rounded-full lg:h-48 lg:w-48 "
                     />
                   </div>
                   <div className="text-center mb-2 lg:text-xl">
                     {/* <EditProfileButton buttonName="Edit Avatar" /> */}
                     <Link to="/changeavatar">
-                      <button>Edit Avatar</button>
+                      <button
+                        className="font-semibold underline
+                      "
+                      >
+                        Edit Avatar
+                      </button>
                     </Link>
                   </div>
                 </section>
