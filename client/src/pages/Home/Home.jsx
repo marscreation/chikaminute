@@ -17,16 +17,14 @@ function Home() {
         <Navbar />
       </UserProvider>
       <ChatProvider>
-        <div className="chat sm:grid relative font-poppins">
+        <div className="chat sm:grid relative font-poppins w-11/12">
           <section className="sidebar">
-
             <div className="flex">
               <SearchChatMate findChat={findChat} setFindChat={setFindChat} />
               <AddContact />
             </div>
- 
+
             <ChatList findChat={findChat} />
-        
           </section>
           <section className="chatbox flex flex-col">
             <ChatBox />

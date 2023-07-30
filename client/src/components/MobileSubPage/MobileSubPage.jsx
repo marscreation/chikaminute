@@ -12,7 +12,7 @@ function MobileSubPage(props) {
       <div className="h-16 lg:h-20 w-full dark:bg-tahiti-200 dark:text-white bg-tahiti-100">
         <div className="header relative">
           {/* <button className="back px-4 h-full absolute left-0">BACK</button> */}
-          <Link to="/home">
+          <Link to="/chat">
             <button>
               <IoIosArrowBack className="w-8 h-8 lg:w-8 lg:h-8 ml-2 lg:ml-5 mt-4" />
             </button>
