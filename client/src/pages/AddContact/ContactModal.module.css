@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Pacifico&family=Poppins&display=swap");
+
+.backdrop {
+  /* text-align: center; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 20;
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+  width: 45%;
+  background-color: white;
+  padding: 10px;
+  margin-left: 15px;
+  margin-top: 10vh;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 30;
+  animation: slide-down 300ms ease-out forwards;
+}
+.dark .modal {
+  background-color: #969697;
+  color: white;
+}
+/* .title {
+  font-family: "Poppins";
+  font-size: 1.2rem;
+} */
+.content {
+  height: "500px";
+  overflowy: "auto";
+}
+.message button {
+  border: none;
+  background: #654e92;
+  color: white;
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 20px;
+}
+.close {
+  font-weight: bolder;
+  float: right;
+  font-size: larger;
+  margin-right: 5px;
+}
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    top: 20vh;
+  }
+}

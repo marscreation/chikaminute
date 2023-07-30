@@ -75,10 +75,9 @@ function ChangePassword() {
   return (
     <MobileSubPage
       header="Change Password"
-      rightBtn="Done"
       fontSize="text-xl lg:text-3xl mr-4 lg:mr-0"
     >
-      <div className="min-h-screen font-poppins">
+      <div className="h-full font-poppins">
         {/* <div className=" h-16 lg:h-20 w-full bg-tahiti-100 flex lg:justify-evenly font-poppins">
         <Link to="/profile">
           <button>
@@ -90,11 +89,11 @@ function ChangePassword() {
         </h1>
         <button className="font-bold mr-2 lg:mr-12">Done</button>
       </div> */}
-        <div className="lg:pl-32 flex min-h-full flex-col px-6 lg:px-8">
+        <div className="flex w-full h-full flex-col px-2 lg:px-8">
           {/* <h1 className="font-extrabold lg:text-4xl text-2xl">Change Password</h1> */}
           <form
             onSubmit={onSubmit}
-            className="lg:ml-40 grid w-full mt-4 lg:mt-8 lg:pl-20"
+            className="grid w-full lg:w-1/2 mt-4 lg:mt-8 mx-auto"
           >
             {/* <div className="mb-4">
             <input
@@ -131,7 +130,7 @@ function ChangePassword() {
                 value={form.password}
                 placeholder="New password"
                 onChange={handleChange}
-                className="dark:bg-tahiti-200 dark:text-white block w-full lg:w-1/2 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
+                className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
               />
               {errors.password && (
                 <label className="text-red-500 text-xs mt-1">
@@ -148,7 +147,7 @@ function ChangePassword() {
                 value={form.confirmPassword}
                 placeholder="Re-type new password"
                 onChange={handleChange}
-                className="dark:bg-tahiti-200 dark:text-white block w-full lg:w-1/2 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
+                className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
               />
               {errors.confirmPassword && (
                 <label className="text-red-500 text-xs mt-1">
@@ -160,7 +159,7 @@ function ChangePassword() {
             {/* <EditProfileButton type={"submit"} buttonName={"Submit Changes"} /> */}
             <button
               type="submit"
-              className="mb-4 lg:mt-8 w-full lg:w-1/2 rounded-md bg-tahiti-150 px-3 p-3 text-md font-semibold leading-6 text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+              className="mb-4 lg:mt-8 w-full rounded-md bg-tahiti-150 px-3 p-3 text-md font-semibold leading-6 text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
             >
               Update Password
             </button>

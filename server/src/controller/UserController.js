@@ -22,16 +22,44 @@ export const getUser = async (req, res) => {
 
 // Get all users
 export const getAllUsers = async (req, res) => {
+  const searchQuery = req.query.search;
+
   try {
-    let users = await UserModel.find();
+    let users;
+    if (searchQuery) {
+      // get users within the query
+      users = await UserModel.find({
+        $or: [
+          { firstname: { $regex: searchQuery, $options: "i" } },
+          { lastname: { $regex: searchQuery, $options: "i" } },
+          { email: { $regex: searchQuery, $options: "i" } },
+          { username: { $regex: searchQuery, $options: "i" } },
+        ],
+      });
+    } else {
+      //get all users if no query
+      users = await UserModel.find();
+    }
+
     users = users.map((user) => {
       const { password, ...otherDetails } = user._doc;
       return otherDetails;
     });
+
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error);
   }
+  // try {
+  //   let users = await UserModel.find();
+  // users = users.map((user) => {
+  //   const { password, ...otherDetails } = user._doc;
+  //   return otherDetails;
+  // });
+  // res.status(200).json(users);
+  // } catch (error) {
+  //   res.status(500).json(error);
+  // }
 };
 
 // udpate a user
@@ -48,15 +76,24 @@ export const updateUser = async (req, res) => {
       }
 
       //added email/username validation when updating a profile
-      const oldUser = await UserModel.findOne({ username });
+      const currentUser = await UserModel.findById(id);
 
-      if (oldUser)
-        return res.status(400).json({ message: "User already exists" });
+      //retain username
+      if (username !== currentUser.username) {
+        const usernameExist = await UserModel.findOne({ username });
 
-      const emailExist = await UserModel.findOne({ email });
+        if (usernameExist) {
+          return res.status(400).json({ message: "User already exists" });
+        }
+      }
 
-      if (emailExist) {
-        return res.status(400).json({ message: "Email already exists" });
+      //retain email
+      if (email !== currentUser.email) {
+        const emailExist = await UserModel.findOne({ email });
+
+        if (emailExist) {
+          return res.status(400).json({ message: "Email already exists" });
+        }
       }
 
       // have to change this

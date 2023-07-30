@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { getUser } from "../../api/UserRequest";
+import blankAvatar from "../../assets/blankAvatar.png";
 import person2 from "../../assets/person2.png";
 import { formatDate } from "../../util/helper";
 import { useChatContext } from "../../context/ChatContext";
 
-function Chatmate({ data, currentUserId }) {
+function Chatmate({ data, currentUserId, findChat }) {
   const [userData, setUserData] = useState(null);
   const [isOnline, setIsOnline] = useState(false);
   const [selected, setSelected] = useState(false);
@@ -58,31 +59,37 @@ function Chatmate({ data, currentUserId }) {
     setSelected(chatId === data._id);
   }, [chatId, data._id]);
 
+  const fullName = `${userData?.firstname} ${userData?.lastname}`;
+  const isMatching = fullName.toLowerCase().includes(findChat.toLowerCase());
+
+  // console.log(userData);
+
   return (
     <>
-      {userData && (
+      {userData && isMatching && (
         <div
           className={`cursor-pointer ${
             selected
               ? "bg-white ml-2 rounded-l-lg dark:bg-tahiti-300"
               : "bg-tahiti-100 rounded-none dark:bg-tahiti-200"
-          } rounded-l-lg text-black dark:text-white border-b-2 dark:border-b-gray-500 flex items-center`}
+          } rounded-l-lg text-black dark:text-white flex items-center`}
           onClick={() => getConversation(userData)}
         >
           <div className="flex-none p-3 relative">
             <span
               className={
-                (isOnline ? "bg-green-500" : "bg-slate-700") +
+                (isOnline ? "bg-green-500" : "bg-white dark:bg-slate-700") +
                 " rounded-full absolute left-0 w-3 h-3 ml-3 border-2 border-slate-400"
               }
             ></span>
             <img
-              src={
-                userData?.profilePicture
-                  ? import.meta.env.VITE_REACT_PUBLIC_FOLDER +
-                    userData.profilePicture
-                  : person2
-              }
+              // src={
+              //   userData?.profilePicture
+              //     ? import.meta.env.VITE_REACT_PUBLIC_FOLDER +
+              //       userData.profilePicture
+              //     : person2
+              // }
+              src={userData?.profilePicture || blankAvatar}
               alt="profile photo"
               className="border-2 border-white dark:border-gray-500 rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
             />

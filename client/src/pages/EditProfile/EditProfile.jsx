@@ -109,12 +109,8 @@ function EditProfile() {
     fetchUserData();
   }, [userId, token]);
   return (
-    <MobileSubPage
-      header="Edit Profile"
-      rightBtn="Done"
-      fontSize="text-2xl lg:text-3xl"
-    >
-      <div className="min-h-screen font-poppins">
+    <MobileSubPage header="Edit Profile" fontSize="text-2xl lg:text-3xl">
+      <div className="h-full font-poppins p-2 lg:pt-12 text-black dark:text-white">
         {/* <div className=" h-16 lg:h-20 w-full bg-tahiti-100 flex lg:justify-evenly font-poppins">
         <Link to="/profile">
           <button>
@@ -127,13 +123,10 @@ function EditProfile() {
         <button className="font-bold mr-2 lg:mr-12">Done</button>
       </div> */}
 
-        <div className="lg:pl-40 flex min-h-full flex-col px-6 lg:px-8 mt-3 lg:mt-12">
-          <h1 className="font-extrabold lg:text-4xl text-2xl">
-            Profile Information
-          </h1>
+        <div className="flex h-full w-full lg:w-1/2 flex-col mx-auto">
           <form
             onSubmit={handleSubmit}
-            className="grid w-full mt-4 lg:mt-8 lg:pl-40"
+            className="grid w-full mt-1"
             // className=""
           >
             <div className="mb-4 lg:flex">
@@ -149,7 +142,7 @@ function EditProfile() {
                 autoComplete="off"
                 onChange={handleChange}
                 // className="border-2 p-2 mt-2 border-tahiti-100 rounded-xl w-full"
-                className="dark:bg-tahiti-200 dark:text-white block w-full lg:w-1/2 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
+                className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
               />
             </div>
             <div className="mb-4 lg:flex">
@@ -164,7 +157,7 @@ function EditProfile() {
                 placeholder="Last name"
                 autoComplete="off"
                 onChange={handleChange}
-                className="dark:bg-tahiti-200 dark:text-white block w-full lg:w-1/2 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
+                className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
               />
             </div>
             <div className="mb-4 lg:flex">
@@ -179,7 +172,7 @@ function EditProfile() {
                 placeholder="Username"
                 autoComplete="off"
                 onChange={handleChange}
-                className="dark:bg-tahiti-200 dark:text-white block w-full lg:w-1/2 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
+                className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
               />
             </div>
             {errors.username && (
@@ -188,9 +181,7 @@ function EditProfile() {
               </label>
             )}
             <div className="mb-4 lg:flex">
-              <label className="lg:pr-10 lg:w-3/12 text-center lg:py-2">
-                Email:{" "}
-              </label>
+              <label className=" lg:w-3/12 text-center lg:py-2">Email: </label>
               <input
                 type="email"
                 id="email"
@@ -199,7 +190,7 @@ function EditProfile() {
                 placeholder="Email"
                 autoComplete="off"
                 onChange={handleChange}
-                className="dark:bg-tahiti-200 dark:text-white block w-full lg:w-1/2 rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
+                className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 bg-tahiti-50 sm:text-sm sm:leading-6 mt-2 lg:mt-0"
               />
             </div>
             {errors.email && (
@@ -208,13 +199,14 @@ function EditProfile() {
               </label>
             )}
             {/* <EditProfileButton buttonName={"Submit Changes"} type={"submit"} /> */}
-
-            <button
-              type="submit"
-              className="lg:ml-auto lg:mr-auto lg:mt-8 lg:w-1/2 w-full rounded-md bg-tahiti-150 px-3 p-3 text-md font-semibold leading-6 text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-            >
-              Update
-            </button>
+            <div>
+              <button
+                type="submit"
+                className="float-right lg:w-99 lg:mt-8 w-full rounded-md bg-tahiti-150 px-3 p-3 text-md font-semibold leading-6 text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+              >
+                Update
+              </button>
+            </div>
             {/* </div> */}
           </form>
         </div>

@@ -26,8 +26,13 @@ export default {
         100: "37rem",
         150: "48rem",
       },
+      width: {
+        99: "80%",
+        101: "95%",
+        111: "97%",
+      },
     },
   },
   darkMode: "class",
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserData";
@@ -23,6 +23,8 @@ function Navbar() {
   const { isLoggedIn, setIsLoggedIn } = useAuthContext();
   const navigate = useNavigate();
 
+  const userDropDownRef = useRef();
+
   //remove token and userId upon logout and redirect to Login page
   function handleLogout() {
     alert("Sign out successful");
@@ -36,6 +38,28 @@ function Navbar() {
   const handleThemeSwitch = () => {
     toggleTheme();
   };
+
+  const closeUserDropDown = () => {
+    setUserDropMenu("hidden");
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        userDropDownRef.current &&
+        !userDropDownRef.current.contains(event.target) &&
+        !event.target.closest("[data-dropdown-toggle='user-dropdown']")
+      ) {
+        closeUserDropDown();
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   const handleUserDropDown = () => {
     if (userDropMenu === "hidden") {
@@ -102,6 +126,7 @@ function Navbar() {
           </button>
           {/* <!-- Dropdown menu --> */}
           <div
+            ref={userDropDownRef}
             className={
               userDropMenu +
               " z-50 absolute m-0 lg:w-60 max-w-s text-base list-none bg-white divide-y divide-gray-100 rounded-b-lg shadow dark:bg-gray-700 dark:divide-gray-600"

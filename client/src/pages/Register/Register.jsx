@@ -145,7 +145,7 @@ function Register() {
   return (
     <>
       <div className="grid min-h-screen font-poppins">
-        <div className="dark:bg-tahiti-300 dark:text-white flex min-h-full flex-col bg-tahiti-100 justify-center px-6 py-6 lg:px-8">
+        <div className="dark:bg-tahiti-300 dark:text-white flex min-h-full flex-col bg-tahiti-100 justify-center px-2 py-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
               className="mx-auto h-28 w-auto"
@@ -157,7 +157,7 @@ function Register() {
             </h2>
           </div>
 
-          <section className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
+          <section className="mt-2 lg:mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
             <form onSubmit={onSubmit} className="space-y-6">
               <div className="mb-10">
                 <div className="flex lg:gap-x-2">
@@ -291,7 +291,7 @@ function Register() {
               </div> */}
               </div>
             </form>
-            <p className="mt-5 lg:text-center lg:text-lg">
+            <p className="mt-2 lg:mt-5 text-center text-lg">
               Already have an account?
               {/* <a
                 href="#"
