@@ -88,8 +88,8 @@ function Navbar() {
   }, [theme]);
 
   return (
-    <nav className=" border-gray-200 dark:bg-tahiti-300 border-b-slate-100 dark:border-b-gray-500 border-b-2 font-poppins">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3 pr-2">
+    <nav className="w-full border-gray-200 dark:bg-tahiti-300 border-b-slate-100 dark:border-b-gray-500 border-b-2 font-poppins">
+      <div className="flex flex-wrap items-center justify-between mx-auto p-3 pr-2">
         <a href="#" className="flex items-center">
           <img src={logo} className="h-10 mr-3 " alt="Chika Minute Logo" />
 

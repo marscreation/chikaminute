@@ -156,14 +156,10 @@ function ChangeAvatar() {
   };
 
   return (
-    <MobileSubPage
-      header="Edit Avatar"
-      rightBtn="Done"
-      fontSize="text-2xl lg:text-3xl"
-    >
-      <div className="grid min-h-screen font-poppins">
+    <MobileSubPage header="Edit Avatar" fontSize="text-2xl lg:text-3xl">
+      <div className="grid h-full font-poppins">
         <div className="mb-3 p-2 pt-2 pb-0 mx-auto">
-          <div className="flex min-h-full flex-col px-6 lg:px-8">
+          <div className="flex min-h-full flex-col px-2 lg:px-8">
             <div>
               <h2 className="text-xl font-semibold -mt-2 lg:mt-2">Note:</h2>
               <ul className="ml-8 mt-2">
@@ -177,7 +173,7 @@ function ChangeAvatar() {
               </ul>
             </div>
             <label htmlFor="avatar-menu-button">
-              <div className="mx-auto mt-2 lg:mt-4 lg:h-52 lg:w-52 rounded-full border-8 border-tahiti-100">
+              <div className="mx-auto mt-2 lg:mt-4 h-44 w-44  lg:h-52 lg:w-52 rounded-full border-8 border-tahiti-100">
                 <img
                   // render base64 file when the user updated the picture, it wont be saved unless submit button is clicked
                   // else render profilePicture from userData (database)
@@ -188,7 +184,7 @@ function ChangeAvatar() {
                     blankAvatar
                   }
                   alt="userAvatar"
-                  className="rounded-full lg:h-48 lg:w-48 "
+                  className="rounded-full h-40 w-40 lg:h-48 lg:w-48 "
                 />
               </div>
             </label>
@@ -242,27 +238,23 @@ function ChangeAvatar() {
                 accept=".jpg, .png .jpeg, .svg"
                 onChange={(event) => handleAvatarUpload(event)}
               />
-              <div className="flex w-full -mt-5 h-16">
-                <div className="w-1/2  mr-3 h-full pt-3 text-center">
+              <div className="flex justify-between mt-5 h-12">
+                <div className="w-1/2 h-full pr-2">
                   <button
                     type="submit"
-                    //classname changes when there is a change in avatar upload, change color upon uploading a new profile picture
-                    //by default (no changes) Save button is not be clickable
-                    //will only be clickable if there are changes
-                    //pa edit nung font colors nalilito ako sa colors thank you!
                     className={`${
                       isChanged
                         ? "bg-tahiti-150 leading-6 text-black shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
                         : "bg-tahiti-150"
-                    } text-white rounded-md text-lg h-full lg:w-full`}
+                    } text-white rounded-md text-lg h-full w-full`}
                   >
                     Save
                   </button>
                 </div>
-                <div className="w-1/2 h-full  pt-3 text-center">
+                <div className="w-1/2 h-full pl-2">
                   <button
                     type="button"
-                    className="lg:w-full h-full text-sm bg-tahiti-150 lg:text-lg hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 text-white font-semibold rounded-md"
+                    className="w-full h-full text-sm bg-tahiti-150 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 text-white font-semibold rounded-md"
                     onClick={handleDiscardChanges}
                     disabled={!isChanged}
                   >

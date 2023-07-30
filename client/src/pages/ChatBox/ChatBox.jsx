@@ -82,7 +82,7 @@ function ChatBox() {
   return (
     <>
       {chatSelected ? (
-        <div className="chatbox-header dark:bg-tahiti-300 dark:text-white text-black shadow-lg dark:shadow-gray-500 flex items-center">
+        <div className="chatbox-header dark:bg-tahiti-300 dark:text-white text-black shadow-lg dark:shadow-none flex items-center">
           <div className="sm:hidden flex-none">
             <button className="p-2 border-2 text-blue-800 dark:text-white">
               <svg
@@ -120,7 +120,7 @@ function ChatBox() {
           No conversation yet
         </div>
       )}
-      <div className="chatbox-body dark:bg-tahiti-300 pr-3 pl-3 lg:pt-5 overflow-y-auto flex-1 shadow-lg dark:shadow-gray-500 ">
+      <div className="chatbox-body dark:bg-tahiti-300 pr-3 pl-3 lg:pt-5 overflow-y-auto flex-1 shadow-lg scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
         {messages &&
           messages.map((message) => (
             <>
@@ -140,50 +140,31 @@ function ChatBox() {
       </div>
       {chatSelected && (
         <div className="flex py-3 px-1 dark:bg-tahiti-300">
-          <label
-            htmlFor="image-upload"
-            className="lg:p-4 p-3 ml-3 cursor-pointer rounded-lg rounded-r-none bg-tahiti-150"
-          >
-            {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="1em"
-            viewBox="0 0 512 512"
-          > */}
-            <TbPhotoPlus className="h-6 w-6 mt-1 lg:mt-0">
-              {/* <path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 340.7l-30.5-42.7C167 291.7 159.8 288 152 288s-15 3.7-19.5 10.1l-80 112L48 416.3l0-.3V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z" /> */}
-            </TbPhotoPlus>
-
-            {/* </svg> */}
-          </label>
+          <div className="flex items-center lg:p-4 p-3 ml-3 cursor-pointer rounded-lg rounded-r-none dark:text-tahiti-300 bg-tahiti-150">
+            <TbPhotoPlus className="h-6 w-6 mt-1 lg:mt-0" />
+          </div>
           <input
             type="file"
             id="image-upload"
             accept="image/*"
-            className="hidden"
+            className="hidden h-full"
           />
+          <div className="relative flex-1">
+            <textarea
+              ref={messageRef}
+              rows="2"
+              className="dark:bg-tahiti-200 w-full h-full dark:text-white border-2 pt-1 rounded-lg rounded-l-none px-3 text-black resize-none"
+              placeholder="Type your reply..."
+              onKeyDown={handleKeyEnter}
+            />
 
-          <textarea
-            ref={messageRef}
-            rows="2"
-            className="relative border-2 pt-1 rounded-lg rounded-l-none px-3 text-black resize-none flex-1"
-            placeholder="Type your reply..."
-            onKeyDown={handleKeyEnter}
-          />
-
-          <button
-            className="p-3 cursor-pointer absolute mt-1 ml-64 lg:ml-150"
-            onClick={handleSendButton}
-          >
-            {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="1em"
-            viewBox="0 0 512 512"
-          > */}
-            <TbSend className="h-6 w-6">
-              {/* <path d="M16.1 260.2c-22.6 12.9-20.5 47.3 3.6 57.3L160 376V479.3c0 18.1 14.6 32.7 32.7 32.7c9.7 0 18.9-4.3 25.1-11.8l62-74.3 123.9 51.6c18.9 7.9 40.8-4.5 43.9-24.7l64-416c1.9-12.1-3.4-24.3-13.5-31.2s-23.3-7.5-34-1.4l-448 256zm52.1 25.5L409.7 90.6 190.1 336l1.2 1L68.2 285.7zM403.3 425.4L236.7 355.9 450.8 116.6 403.3 425.4z" /> */}
-            </TbSend>
-            {/* </svg> */}
-          </button>
+            <button
+              className="dark:text-white cursor-pointer absolute top-2 right-3 transform translate-y-1/2"
+              onClick={handleSendButton}
+            >
+              <TbSend className="w-6 h-6" />
+            </button>
+          </div>
         </div>
       )}
     </>
