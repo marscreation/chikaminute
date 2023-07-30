@@ -39,20 +39,18 @@
       top: 0;
       left: 100%;
       width: 100vw;
-      /* transform: translateX(0%); */
+      height: calc(100vh - 66px);
       background-color: white;
       position: absolute;
-      transition: all 1s ease-in-out;
+      transition: all 0.5s ease-in-out;
     }
     div.chat > .chatbox.show {
       left: 0;
-      /* transform: translateX(0%); */
     }
     .dark div.chat > .chatbox {
       background-color: #252738;
     }
-  
     .chat .chatbox-body {
-        max-height: calc(100vh - 75px - 150px);
+        height: calc(100vh - 74px - 144px);
       }
   }

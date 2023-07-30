@@ -23,7 +23,7 @@ function Chat() {
               </div>
               <Channels findChat={findChat} />
             </section>
-            <section className="chatbox flex flex-col">
+            <section className="chatbox flex flex-col show">
               <Outlet />
             </section>
           </div>
