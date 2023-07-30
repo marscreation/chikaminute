@@ -1,7 +1,7 @@
 import { useChatContext } from "../../context/ChatContext";
 import Chatmate from "../ChatMate/ChatMate";
 
-function ChatList() {
+function ChatList({ findChat }) {
   const { chats, user } = useChatContext();
 
   return (
@@ -10,7 +10,12 @@ function ChatList() {
         Conversation
       </div>
       {chats.map((chat) => (
-        <Chatmate key={chat._id} data={chat} currentUserId={user.id} />
+        <Chatmate
+          key={chat._id}
+          data={chat}
+          currentUserId={user.id}
+          findChat={findChat}
+        />
       ))}
     </div>
   );

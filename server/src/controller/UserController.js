@@ -76,15 +76,24 @@ export const updateUser = async (req, res) => {
       }
 
       //added email/username validation when updating a profile
-      const oldUser = await UserModel.findOne({ username });
+      const currentUser = await UserModel.findById(id);
 
-      if (oldUser)
-        return res.status(400).json({ message: "User already exists" });
+      //retain username
+      if (username !== currentUser.username) {
+        const usernameExist = await UserModel.findOne({ username });
 
-      const emailExist = await UserModel.findOne({ email });
+        if (usernameExist) {
+          return res.status(400).json({ message: "User already exists" });
+        }
+      }
 
-      if (emailExist) {
-        return res.status(400).json({ message: "Email already exists" });
+      //retain email
+      if (email !== currentUser.email) {
+        const emailExist = await UserModel.findOne({ email });
+
+        if (emailExist) {
+          return res.status(400).json({ message: "Email already exists" });
+        }
       }
 
       // have to change this
