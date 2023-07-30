@@ -1,40 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import { useUserContext } from '../../context/UserData';
-import { userChats } from '../../api/ChatRequest';
-import Member from '../Member/Member';
-import { useChatContext } from '../../context/ChatContext';
+import React, { useEffect, useState } from "react";
+import { useUserContext } from "../../context/UserData";
+import { userChats } from "../../api/ChatRequest";
+import Member from "../Member/Member";
+import { useChatContext } from "../../context/ChatContext";
 
-function Channels() {
-  const user = useUserContext()
-  const { setChats, chats } = useChatContext()
-  const [channels, setChannels] = useState([])
-  const [loading, setLoading] = useState(true)
+function Channels({ findChat }) {
+  const user = useUserContext();
+  const { setChats, chats } = useChatContext();
+  const [channels, setChannels] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const loadChannels = async () => {
     try {
       const data = await userChats(user?._id);
-      setChannels(data)
-      setLoading(false)
-      setChats(data)
+      setChannels(data);
+      setLoading(false);
+      setChats(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    loadChannels()
-  }, [user])
+    loadChannels();
+  }, [user]);
 
   useEffect(() => {
-    setChannels(chats)
-  }, [chats])
+    setChannels(chats);
+  }, [chats]);
 
   if (loading) {
-    return (<div className='dark:text-slate-600 font-extrabold text-2xl h-full flex place-content-center'>...Loading</div>)
+    return (
+      <div className="dark:text-slate-600 font-extrabold text-2xl h-full flex place-content-center">
+        ...Loading
+      </div>
+    );
   }
-  
-  if(!channels){
-    return (<div className='dark:text-slate-600 font-extrabold text-2xl h-full flex place-items-center place-content-center'>No Conversation Found</div>)
+
+  if (!channels) {
+    return (
+      <div className="dark:text-slate-600 font-extrabold text-2xl h-full flex place-items-center place-content-center">
+        No Conversation Found
+      </div>
+    );
   }
 
   return (
@@ -44,11 +52,16 @@ function Channels() {
       </div>
       <div>
         {channels.map((channel) => (
-          <Member key={channel._id} data={channel} currentUserId={user._id} />
+          <Member
+            key={channel._id}
+            data={channel}
+            currentUserId={user._id}
+            findChat={findChat}
+          />
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default Channels
+export default Channels;

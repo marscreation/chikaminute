@@ -64,7 +64,7 @@ function ContactModal({ onClose }) {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center z-50">
-      <div className="w-4/12 bg-white dark:bg-tahiti-300 dark:text-white rounded-lg shadow-lg overflow-hidden">
+      <div className="w-11/12 lg:w-4/12 bg-white dark:bg-tahiti-300 dark:text-white rounded-lg shadow-lg overflow-hidden">
         <div className="p-4">
           <div className="flex justify-end">
             <button
