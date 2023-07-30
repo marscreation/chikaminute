@@ -19,9 +19,14 @@ function Home() {
       <ChatProvider>
         <div className="chat sm:grid relative font-poppins">
           <section className="sidebar">
-            <SearchChatMate findChat={findChat} setFindChat={setFindChat} />
+
+            <div className="flex">
+              <SearchChatMate findChat={findChat} setFindChat={setFindChat} />
+              <AddContact />
+            </div>
+ 
             <ChatList findChat={findChat} />
-            <AddContact />
+        
           </section>
           <section className="chatbox flex flex-col">
             <ChatBox />
