@@ -62,7 +62,7 @@ function Chatmate({ data, currentUserId, findChat }) {
   const fullName = `${userData?.firstname} ${userData?.lastname}`;
   const isMatching = fullName.toLowerCase().includes(findChat.toLowerCase());
 
-  console.log(userData);
+  // console.log(userData);
 
   return (
     <>

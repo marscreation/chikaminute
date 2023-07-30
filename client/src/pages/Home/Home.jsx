@@ -6,6 +6,7 @@ import "./Home.css";
 import { ChatProvider } from "../../context/ChatContext";
 import { UserProvider } from "../../context/UserData";
 import SearchChatMate from "./SearchChatMate";
+import AddContact from "../AddContact/AddContact";
 
 function Home() {
   const [findChat, setFindChat] = useState("");
@@ -20,6 +21,7 @@ function Home() {
           <section className="sidebar">
             <SearchChatMate findChat={findChat} setFindChat={setFindChat} />
             <ChatList findChat={findChat} />
+            <AddContact />
           </section>
           <section className="chatbox flex flex-col">
             <ChatBox />
