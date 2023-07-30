@@ -5,6 +5,7 @@ import "./Home.css";
 import { ChatProvider } from "../../context/ChatContext";
 import { UserProvider } from "../../context/UserData";
 import AddChatMate from "./AddChatMate";
+import AddContact from "../AddContact/AddContact";
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
           <section className="sidebar">
             <AddChatMate />
             <ChatList />
+            <AddContact />
           </section>
           <section className="chatbox flex flex-col">
             <ChatBox />
