@@ -1,0 +1,24 @@
+.chatbox-body {
+    height: calc(100% - 140px - 88px);
+}
+
+.chatbox-body .sender,
+.chatbox-body .receiver {
+    clear: both;
+}
+
+.chatbox-body .sender > div {
+    float: right;
+}
+
+.chatbox-body .sender p {
+    background-color: #f0f4f8;
+}
+
+.chatbox-body .receiver > div {
+    float: left;
+}
+
+.chatbox-body .receiver p {
+    background-color: #4cb5f9;
+}

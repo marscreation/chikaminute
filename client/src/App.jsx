@@ -14,6 +14,8 @@ import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
 import ChangeAvatar from "./pages/EditProfile/ChangeAvatar";
 import Account from "./pages/EditProfile/Account";
+import Chat from "./pages/Chat/Chat";
+import Messages from "./components/Messages/Messages";
 
 function App() {
   function PrivateRoute({ element: Element }) {
@@ -35,6 +37,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<PrivateRoute element={Home} />} />
+              <Route path="/chat" element={<PrivateRoute element={Chat} />} >
+                <Route path=":chatId" element={<Messages/>} />
+              </Route>
               <Route
                 path="/register"
                 element={<PrivateRoute element={Register} />}

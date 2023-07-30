@@ -67,7 +67,7 @@ function Login() {
         sessionStorage.setItem("userId", result.user.id);
         console.log(result);
         setIsLoggedIn(true);
-        navigate("/home");
+        navigate("/chat");
         alert("Welcome");
       }
       // if (result.message === "Invalid Password") {
@@ -87,7 +87,7 @@ function Login() {
 
     if (token && userId) {
       setIsLoggedIn(true);
-      navigate("/home");
+      navigate("/chat");
     }
   }, []);
 
