@@ -4,10 +4,12 @@ import { ChatProvider } from "../../context/ChatContext";
 import { Outlet } from "react-router-dom";
 import Channels from "../../components/Channels/Channels";
 import "./Chat.css";
+import { useState } from "react";
 import SearchChatMate from "../Home/SearchChatMate";
 import AddContact from "../AddContact/AddContact";
 
 function Chat() {
+  const [findChat, setFindChat] = useState("");
   return (
     <>
       <UserProvider>
@@ -16,10 +18,10 @@ function Chat() {
           <div className="chat sm:grid relative font-poppins">
             <section className="sidebar">
               <div className="flex">
-                <SearchChatMate />
+                <SearchChatMate findChat={findChat} setFindChat={setFindChat} />
                 <AddContact />
               </div>
-              <Channels />
+              <Channels findChat={findChat} />
             </section>
             <section className="chatbox flex flex-col">
               <Outlet />

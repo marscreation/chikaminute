@@ -1,5 +1,4 @@
 import { AiOutlineSearch } from "react-icons/ai";
-import { useState } from "react";
 
 function SearchChatMate({ findChat, setFindChat }) {
   const handleInputChange = (event) => {

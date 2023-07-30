@@ -37,8 +37,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<PrivateRoute element={Home} />} />
-              <Route path="/chat" element={<PrivateRoute element={Chat} />} >
-                <Route path=":chatId" element={<Messages/>} />
+              <Route path="/chat" element={<PrivateRoute element={Chat} />}>
+                <Route path=":chatId" element={<Messages />} />
               </Route>
               <Route
                 path="/register"
