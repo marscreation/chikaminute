@@ -70,7 +70,7 @@ function Member({ data, currentUserId }) {
   }
 
   return (
-    <Link to={`/chat/${data._id}`}>
+    <Link to={`/chat/${data._id}`} onClick={()=>document.querySelector("section.chatbox").classList.add("show")}>
       <div
         className={`cursor-pointer ${selected
           ? "bg-white ml-2 rounded-l-lg dark:bg-tahiti-300"

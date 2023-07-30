@@ -94,7 +94,7 @@ function Messages() {
     <>
       <div key={`${chatId}header`} className="chatbox-header dark:bg-tahiti-300 dark:text-white text-black shadow-lg dark:shadow-none flex items-center">
         <div className="sm:hidden flex-none">
-          <button className="p-2 border-2 text-blue-800 dark:text-white">
+          <button className="p-2 text-blue-800 dark:text-white" onClick={()=>document.querySelector("section.chatbox").classList.remove("show")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
