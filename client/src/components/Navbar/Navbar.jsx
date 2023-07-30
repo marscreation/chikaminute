@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { User } from "../../store/userDetails";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserData";
 import { useTheme } from "../../context/ThemeContext";
@@ -13,10 +12,8 @@ import {
   RiDeleteBin5Fill,
   RiUserSettingsFill,
 } from "react-icons/ri";
-// import { , RiMoonFill, RiSunFill } from "react-icons/ri";
 
 function Navbar() {
-  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const [userDropMenu, setUserDropMenu] = useState("hidden");
   const [settingsDropDownMenu, setSettingsDropDownMenu] = useState("hidden");
 
@@ -37,9 +34,6 @@ function Navbar() {
   }
 
   const handleThemeSwitch = () => {
-    // const updatedTheme = theme === "dark" ? "light" : "dark";
-    // setTheme(updatedTheme);
-    // localStorage.setItem("theme", updatedTheme);
     toggleTheme();
   };
 
@@ -58,14 +52,6 @@ function Navbar() {
       setSettingsDropDownMenu("hidden");
     }
   };
-
-  // useEffect(() => {
-  //   if (window.matchMedia("{prefers-color-scheme: dark}").matches) {
-  //     setTheme("light");
-  //   } else {
-  //     setTheme("dark");
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -88,8 +74,8 @@ function Navbar() {
   }, [theme]);
 
   return (
-    <nav className=" border-gray-200 dark:bg-tahiti-300 border-b-slate-100 dark:border-b-gray-500 border-b-2 font-poppins">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3 pr-2">
+    <nav className="w-full border-gray-200 dark:bg-tahiti-300 border-b-slate-100 dark:border-b-gray-800 border-b-2 font-poppins">
+      <div className="flex flex-wrap items-center justify-between mx-auto p-3 pr-2">
         <a href="#" className="flex items-center">
           <img src={logo} className="h-10 mr-3 " alt="Chika Minute Logo" />
 

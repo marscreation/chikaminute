@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import female from "../../assets/female2.png";
-import ReceivedChat from "./ReceivedChat";
-import SentChat from "./SentChat";
 import "./ChatBox.css";
 import { useChatContext } from "../../context/ChatContext";
-import { User } from "../../store/userDetails";
 import { getMessage, sendMessage } from "../../api/MessageRequest";
 import { TbSend } from "react-icons/tb";
 import { TbPhotoPlus } from "react-icons/tb";
