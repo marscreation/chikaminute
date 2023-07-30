@@ -93,7 +93,7 @@ function Login() {
 
   return (
     <div className="login grid min-h-screen font-poppins">
-      <div className="bg-tahiti-100 dark:bg-tahiti-300 dark:text-white flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="bg-tahiti-100 dark:bg-tahiti-300 dark:text-white flex min-h-full flex-col justify-center px-2 py-8 lg:py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-28 w-auto" src={logo} alt="Your Company" />
           <h2 className="mt-4 text-center text-5xl font-bold leading-9 tracking-tight text-tahiti-150 mb-4">
@@ -115,7 +115,7 @@ function Login() {
                   value={loginForm.username}
                   onChange={handleInputChange}
                   placeholder="Username"
-                  className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md border-0 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 sm:text-sm sm:leading-6"
+                  className="dark:bg-tahiti-200 dark:text-white block w-full rounded-md p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tahiti-150 sm:text-sm sm:leading-6"
                   required
                 />
               </div>
@@ -152,7 +152,7 @@ function Login() {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-lg ">
+          <p className="mt-6 lg:mt-10 text-center text-lg ">
             Don't have an account?
             {/* <a
               href="#"

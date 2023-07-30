@@ -53,7 +53,7 @@ function EditProfile() {
       </div> */}
       {/* <Navbar /> */}
       <MobileSubPage header="Profile" fontSize="text-2xl lg:text-3xl">
-        <div className="grid min-h-screen font-poppins">
+        <div className="grid h-full font-poppins">
           <div className="flex min-h-full flex-col px-6 lg:px-8">
             {userData ? (
               <>
@@ -65,18 +65,18 @@ function EditProfile() {
                       </button>
                     </Link>
                   </div> */}
-                  <div className="mx-auto mt-2 lg:h-52 lg:w-52 rounded-full border-8 border-tahiti-100">
+                  <div className="mx-auto mt-2 h-44 w-44 lg:h-52 lg:w-52 rounded-full border-8 border-tahiti-100">
                     <img
                       src={userData?.profilePicture || blankAvatar}
                       alt="userAvatar"
-                      className="rounded-full lg:h-48 lg:w-48 "
+                      className="rounded-full h-40 w-40 lg:h-48 lg:w-48 "
                     />
                   </div>
                   <div className="text-center mb-2 lg:text-xl">
                     {/* <EditProfileButton buttonName="Edit Avatar" /> */}
                     <Link to="/changeavatar">
                       <button
-                        className="font-semibold underline
+                        className="font-semibold underline mt-2
                       "
                       >
                         Edit Avatar
