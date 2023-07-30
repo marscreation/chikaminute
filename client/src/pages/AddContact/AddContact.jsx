@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ContactModal from "./ContactModal";
+import { IoPersonAdd } from "react-icons/io5";
 
 function AddContact() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,7 +15,9 @@ function AddContact() {
 
   return (
     <div>
-      <button onClick={openModal}>Add Contact</button>
+      <button className="mt-2 lg:mt-5 lg:mr-3 mr-1" onClick={openModal}>
+        <IoPersonAdd className="h-11 w-10 text-tahiti-150" />
+      </button>
       {isModalOpen && <ContactModal onClose={closeModal} />}
     </div>
   );

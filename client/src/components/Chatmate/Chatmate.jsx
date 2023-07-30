@@ -72,7 +72,7 @@ function Chatmate({ data, currentUserId }) {
           <div className="flex-none p-3 relative">
             <span
               className={
-                (isOnline ? "bg-green-500" : "bg-slate-700") +
+                (isOnline ? "bg-green-500" : "bg-white dark:bg-slate-700") +
                 " rounded-full absolute left-0 w-3 h-3 ml-3 border-2 border-slate-400"
               }
             ></span>

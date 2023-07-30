@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 function AddChatMate() {
   return (
-    <div className="relative h-auto p-2 lg:p-6">
+    <div className="relative w-11/12 h-auto p-2 lg:p-5">
       <div className="absolute inset-y-0 left-0 pl-4 lg:pl-9 flex items-center pointer-events-none">
         <AiOutlineSearch className="text-gray-600 dark:text-white" />
       </div>
