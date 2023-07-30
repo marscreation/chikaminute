@@ -39,11 +39,6 @@ export const getAllUsers = async (req, res) => {
     } else {
       //get all users if no query
       users = await UserModel.find();
-      users = users.map((user) => {
-        const { password, ...otherDetails } = user._doc;
-        return otherDetails;
-      });
-      res.status(200).json(users);
     }
 
     users = users.map((user) => {
