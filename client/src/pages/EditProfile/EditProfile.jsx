@@ -194,7 +194,7 @@ function EditProfile() {
               />
             </div>
             {errors.email && (
-              <label className="text-red-500 text-xs -mt-3 mb-3 ">
+              <label className="text-red-500 text-xs -mt-3 mb-3 lg:ml-60">
                 {errors.email}
               </label>
             )}
