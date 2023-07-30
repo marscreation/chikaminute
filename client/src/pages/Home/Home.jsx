@@ -1,13 +1,15 @@
+import { useState } from "react";
 import ChatBox from "../ChatBox/ChatBox";
 import ChatList from "../../components/ChatList/ChatList";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Home.css";
 import { ChatProvider } from "../../context/ChatContext";
 import { UserProvider } from "../../context/UserData";
-import AddChatMate from "./AddChatMate";
-import AddContact from "../AddContact/AddContact";
+import SearchChatMate from "./SearchChatMate";
 
 function Home() {
+  const [findChat, setFindChat] = useState("");
+
   return (
     <>
       <UserProvider>
@@ -16,9 +18,8 @@ function Home() {
       <ChatProvider>
         <div className="chat sm:grid relative font-poppins">
           <section className="sidebar">
-            <AddChatMate />
-            <ChatList />
-            <AddContact />
+            <SearchChatMate findChat={findChat} setFindChat={setFindChat} />
+            <ChatList findChat={findChat} />
           </section>
           <section className="chatbox flex flex-col">
             <ChatBox />

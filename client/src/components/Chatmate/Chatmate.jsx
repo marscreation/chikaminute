@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { getUser } from "../../api/UserRequest";
+import blankAvatar from "../../assets/blankAvatar.png";
 import person2 from "../../assets/person2.png";
 import { formatDate } from "../../util/helper";
 import { useChatContext } from "../../context/ChatContext";
 
-function Chatmate({ data, currentUserId }) {
+function Chatmate({ data, currentUserId, findChat }) {
   const [userData, setUserData] = useState(null);
   const [isOnline, setIsOnline] = useState(false);
   const [selected, setSelected] = useState(false);
@@ -58,9 +59,14 @@ function Chatmate({ data, currentUserId }) {
     setSelected(chatId === data._id);
   }, [chatId, data._id]);
 
+  const fullName = `${userData?.firstname} ${userData?.lastname}`;
+  const isMatching = fullName.toLowerCase().includes(findChat.toLowerCase());
+
+  console.log(userData);
+
   return (
     <>
-      {userData && (
+      {userData && isMatching && (
         <div
           className={`cursor-pointer ${
             selected
@@ -77,12 +83,13 @@ function Chatmate({ data, currentUserId }) {
               }
             ></span>
             <img
-              src={
-                userData?.profilePicture
-                  ? import.meta.env.VITE_REACT_PUBLIC_FOLDER +
-                    userData.profilePicture
-                  : person2
-              }
+              // src={
+              //   userData?.profilePicture
+              //     ? import.meta.env.VITE_REACT_PUBLIC_FOLDER +
+              //       userData.profilePicture
+              //     : person2
+              // }
+              src={userData?.profilePicture || blankAvatar}
               alt="profile photo"
               className="border-2 border-white dark:border-gray-500 rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
             />
