@@ -42,7 +42,7 @@ function Member({ data, currentUserId, findChat }) {
     getMemberData();
   }, []);
 
-  useEffect(() => { }, [data]);
+  useEffect(() => {}, [data]);
 
   useEffect(() => {
     setSelected(chatId === data._id);
@@ -75,12 +75,13 @@ function Member({ data, currentUserId, findChat }) {
   return (
     <>
       {memberData && isMatching && (
-        <Link to={`/chat/${data._id}`} onClick={() => document.querySelector("section.chatbox").classList.add("show")}>
+        <Link to={`/chat/${data._id}`}>
           <div
-            className={`cursor-pointer ${selected
-              ? "bg-white ml-2 rounded-l-lg dark:bg-tahiti-300"
-              : "bg-tahiti-100 rounded-none dark:bg-tahiti-200"
-              } rounded-l-lg text-black dark:text-white flex items-center`}
+            className={`cursor-pointer ${
+              selected
+                ? "bg-white ml-2 rounded-l-lg dark:bg-tahiti-300"
+                : "bg-tahiti-100 rounded-none dark:bg-tahiti-200"
+            } rounded-l-lg text-black dark:text-white flex items-center`}
           >
             <div className="flex-none p-3 relative">
               <span
@@ -93,7 +94,7 @@ function Member({ data, currentUserId, findChat }) {
                 src={
                   // memberData?.profilePicture
                   //   ? import.meta.env.VITE_REACT_PUBLIC_FOLDER +
-                  //   memberData.profilePicture
+                  //     memberData.profilePicture
                   //   : person2
                   memberData?.profilePicture || blankAvatar
                 }
@@ -116,7 +117,7 @@ function Member({ data, currentUserId, findChat }) {
         </Link>
       )}
     </>
-  )
+  );
 }
 
 export default Member;

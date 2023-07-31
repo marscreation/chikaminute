@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import blankAvatar from "../../assets/blankAvatar.png";
 import female from "../../assets/female2.png";
 import "./ChatBox.css";
 import { useChatContext } from "../../context/ChatContext";
@@ -100,7 +101,7 @@ function ChatBox() {
           </div>
           <div className="flex-none p-3 ml-3">
             <img
-              src={female}
+              src={chatmateInfo?.profilePicture || blankAvatar}
               alt=""
               className="border-2 border-white dark:border-gray-500 rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
             />
