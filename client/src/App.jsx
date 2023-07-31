@@ -11,7 +11,7 @@ import Profile from "./pages/Profile/Profile";
 import ChangePassword from "./pages/EditProfile/ChangePassword";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Register from "./pages/Register/Register";
-import Home from "./pages/Home/Home";
+// import Home from "./pages/Home/Home";
 import ChangeAvatar from "./pages/EditProfile/ChangeAvatar";
 import Account from "./pages/EditProfile/Account";
 import Chat from "./pages/Chat/Chat";
@@ -36,7 +36,7 @@ function App() {
           <AuthProvider>
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/home" element={<PrivateRoute element={Home} />} />
+              {/* <Route path="/home" element={<PrivateRoute element={Home} />} /> */}
               <Route path="/chat" element={<PrivateRoute element={Chat} />}>
                 <Route path=":chatId" element={<Messages />} />
               </Route>
