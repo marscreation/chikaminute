@@ -238,7 +238,7 @@ function ChangeAvatar() {
                 accept=".jpg, .png .jpeg, .svg"
                 onChange={(event) => handleAvatarUpload(event)}
               />
-              <div className="flex justify-between h-10">
+              <div className="flex justify-between h-10 lg:h-14">
                 <div className="w-1/2 h-full pr-2">
                   <button
                     type="submit"

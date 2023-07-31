@@ -14,7 +14,7 @@ function SearchChatMate({ findChat, setFindChat }) {
         type="text"
         value={findChat}
         onChange={handleInputChange}
-        placeholder="Search chat..."
+        placeholder="Search user..."
         className="w-full rounded-lg border dark:bg-tahiti-300 dark:text-white border-gray-300 pl-8 lg:pl-10 pr-4 py-2 focus:outline-none focus:ring focus:border-tahiti-150 dark:focus:border-gray-500"
       />
     </div>
