@@ -68,7 +68,6 @@ function Messages() {
 
   useEffect(() => {
     const current = members.find((id) => chatId === id.chatId);
-    console.log("members", members, current);
     setCurrentMember(current);
   }, [chatId, members]);
 
