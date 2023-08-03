@@ -228,7 +228,7 @@ function ChangeAvatar() {
               </ul>
               {/*  */}
             </div>
-            <form onSubmit={handleSubmit} className="w-fullmt-4 lg:mt-8">
+            <form onSubmit={handleSubmit} className="w-full mt-4 lg:mt-8">
               {/* input is hidden, picture is clickable */}
               <input
                 type="file"
@@ -238,7 +238,7 @@ function ChangeAvatar() {
                 accept=".jpg, .png .jpeg, .svg"
                 onChange={(event) => handleAvatarUpload(event)}
               />
-              <div className="flex justify-between mt-5 h-12">
+              <div className="flex justify-between h-10 lg:h-14">
                 <div className="w-1/2 h-full pr-2">
                   <button
                     type="submit"

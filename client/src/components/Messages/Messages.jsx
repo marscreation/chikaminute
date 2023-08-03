@@ -158,7 +158,7 @@ function Messages() {
                 <img
                   src={currentMember?.profilePicture || blankAvatar}
                   alt=""
-                  className="border-2 border-white dark:border-gray-500 rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
+                  className="mr-3 mt-2 border-2 border-white dark:border-gray-500 rounded-3xl h-10 w-10 lg:h-12 lg:w-12"
                 />
               )}
               <div className="mt-3">
