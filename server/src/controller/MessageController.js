@@ -16,7 +16,6 @@ export const addMessage = async (req, res) => {
       { $set: { lastMessage: text } },
       { new: true }
     );
-    console.log("findOneAndUpdate", res2);
     // if (typeof receiverId != undefined ) {
     const activeUser = global.activeUsers.find(
       (user) => user.userId === receiverId
@@ -27,7 +26,6 @@ export const addMessage = async (req, res) => {
     const chatMembers = res2.members.map((member) =>
       global.activeUsers.find((user) => user.userId === member)
     );
-    console.log("chatMembers", chatMembers);
     for (const member of chatMembers) {
       if (member) io.to(member.socketId).emit("update_chat", res2);
     }

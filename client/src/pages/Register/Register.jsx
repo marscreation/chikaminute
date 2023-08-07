@@ -88,7 +88,7 @@ function Register() {
       }
 
       //fetch data
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -293,12 +293,6 @@ function Register() {
             </form>
             <p className="mt-2 lg:mt-5 text-center text-lg">
               Already have an account?
-              {/* <a
-                href="#"
-                className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"
-              >
-                Login
-              </a> */}
               <Link
                 to="/"
                 className="ml-2 font-semibold leading-6 text-tahiti-150 hover:text-blue-500"

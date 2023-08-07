@@ -5,7 +5,7 @@ let io;
 export function configSocket(server) {
   io = new Server(server, {
     cors: {
-      origin: "http://localhost:8000",
+      origin: process.env.CLIENT_CONNECTION,
       methods: ["GET", "POST"],
     },
   });
@@ -18,7 +18,6 @@ export function configSocket(server) {
           socketId: socket.id,
         });
       }
-      console.log("Connected users", global.activeUsers);
       io.emit("get-users", global.activeUsers);
     });
 
@@ -26,7 +25,6 @@ export function configSocket(server) {
       global.activeUsers = global.activeUsers.filter(
         (user) => user.socketId !== socket.id
       );
-      console.log("User Disconnected", global.activeUsers);
       io.emit("get-users", global.activeUsers);
     });
 
@@ -35,8 +33,6 @@ export function configSocket(server) {
       const user = global.activeUsers.find(
         (user) => user.userId === receiverId
       );
-      console.log("Send to ", receiverId);
-      console.log("Data", data);
       if (user) {
         io.to(user.socketId).emit("receive_message", data);
       }
