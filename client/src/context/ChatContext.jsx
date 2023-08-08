@@ -27,7 +27,7 @@ export function ChatProvider({ children }) {
   }
 
   useEffect(() => {
-    socket.current = io.connect("http://127.0.0.1:3001");
+    socket.current = io.connect(import.meta.env.VITE_REACT_SOCKET_URL);
   }, []);
 
   useEffect(() => {

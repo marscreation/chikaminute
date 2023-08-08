@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
 
   const [userData, setUserData] = useState(null);
 
-  const hostURL = "http://127.0.0.1:3000";
+  const hostURL = import.meta.env.VITE_REACT_API_URL;
 
   const fetchUserData = async () => {
     try {

@@ -32,7 +32,7 @@ app.use("/images", express.static("images"));
 mongoose
   .connect(CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    app.listen(PORT, () => console.log(`Listening at Port ${PORT}`));
+    // app.listen(PORT, () => console.log(`Listening at Port ${PORT}`));
     server.listen(3001, () => console.log("Socket server running 3001"));
   })
   .catch((error) => console.log(`${error} did not connect`));

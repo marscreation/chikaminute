@@ -17,7 +17,7 @@ function ChangePassword() {
 
   const userId = sessionStorage.getItem("userId");
   const token = sessionStorage.getItem("token");
-  const hostURL = "http://127.0.0.1:3000";
+  const hostURL = import.meta.env.VITE_REACT_API_URL;
 
   const handleChange = (event) => {
     setForm((previous) => ({

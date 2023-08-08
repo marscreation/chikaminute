@@ -8,7 +8,7 @@ function ContactModal({ onClose }) {
   const [searchResult, setSearchResult] = useState([]);
 
   const currentUserId = sessionStorage.getItem("userId");
-  const hostURL = "http://127.0.0.1:3000";
+  const hostURL = import.meta.env.VITE_REACT_API_URL;
 
   useEffect(() => {
     const fetchResults = async () => {

@@ -65,7 +65,6 @@ function Login() {
       if (result.token) {
         sessionStorage.setItem("token", result.token);
         sessionStorage.setItem("userId", result.user.id);
-        console.log(result);
         setIsLoggedIn(true);
         navigate("/chat");
         alert("Welcome");
